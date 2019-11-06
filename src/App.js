@@ -7,8 +7,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>React Pokémon App</h1>
+        <span>An app to get familiar with React using the Pokémon API</span>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
