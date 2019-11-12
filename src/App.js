@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import './App.css';
+
+import Overview from './components/Overview';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>React Pokémon App</h1>
-        <span>An app to get familiar with React using the Pokémon API</span>
-        <p>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Overview/>
+          </Route>
+          <Route path="/selection">
+            <div>This route will be used for Pokemon selection.</div>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
