@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import './Overview.css';
 
 function Overview() {
@@ -6,12 +8,15 @@ function Overview() {
 		document.title = `Welcome to the React Pokemon App`;
 	}, []);
 
+	let history = useHistory();
+	const handleClick = () => history.push("/selection");
+
 	return (
 		<div className="Overview">
 			<div className="header-container">
 				<h1 className="header-title">POKEMON BATTLE</h1>
 				<div className="subtitle">Test your skills building a Pokemon application</div>
-				<button className="go-to-selection">{`LET'S DO IT!`}</button>
+				<button className="go-to-selection" onClick={handleClick}>{`LET'S DO IT!`}</button>
 			</div>
 
 			<section className="description">
@@ -21,15 +26,15 @@ function Overview() {
 				<h2 className="section-title">CHALLENGE</h2>
 				<div className="description">
 					We will be creating a model to instantiate new pokemons and supply our application with data, having several fields such as their name, type, weakness and other stats.
-        </div>
+				</div>
 
 				<h2 className="section-title">HOW IT WORKS</h2>
 				<video width="auto" height="auto" controls>
 					(Your browser does not support the video tag).
-        </video>
+				</video>
 			</section>
 
-			<button className="go-to-selection">{`LET'S DO IT!`}</button>
+			<button className="go-to-selection" onClick={handleClick}>{`LET'S DO IT!`}</button>
 		</div>
 	);
 }
