@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Overview/>
+            <Overview title={'Pokemon Battle'} subtitle={'Test your skills '}/>
           </Route>
           <Route path="/selection">
             <div>This route will be used for Pokemon selection.</div>

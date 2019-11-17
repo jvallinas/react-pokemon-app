@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './Overview.module.css';
 
-import './Overview.css';
+const propTypes = {
+	title: PropTypes.string,
+	subtitle: PropTypes.string
+}
 
-function Overview() {
+function Overview(props) {
 	useEffect(() => {
 		document.title = `Welcome to the React Pokemon App`;
 	}, []);
@@ -28,20 +32,22 @@ function Overview() {
 				<section>
 					<h1 className={styles['section-title']}>CHALLENGE</h1>
 					<div className={styles['description']}>
-					We will be creating a model to instantiate new pokemons and supply our application with data, having several fields such as their name, type, weakness and other stats.
+						We will be creating a model to instantiate new pokemons and supply our application with data, having several fields such as their name, type, weakness and other stats.
 				</div>
 				</section>
 				<section>
 					<h1 className={styles['section-title']}>HOW IT WORKS</h1>
-				<video width="auto" height="auto" controls>
-					(Your browser does not support the video tag).
+					<video width="auto" height="auto" controls>
+						(Your browser does not support the video tag).
 				</video>
-			</section>
+				</section>
 			</div>
 
 			<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
 		</>
 	);
 }
+
+Overview.propTypes = propTypes;
 
 export default Overview;
