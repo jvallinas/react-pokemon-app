@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Overview.module.css';
 
-const propTypes = {
+import OverviewSteps, {STEPS_INFO} from './OverviewSteps';
+
+const overviewPropTypes = {
 	title: PropTypes.string,
 	subtitle: PropTypes.string
 }
@@ -20,7 +22,7 @@ function Overview(props) {
 		<>
 			<div className={styles['header-container']}>
 				<h1 className={styles['header-title']}>{props.title.toUpperCase()}</h1>
-				<div className={styles['subtitle']}>{props.subtitle}</div>
+				<div className={styles['header-subtitle']}>{props.subtitle.toUpperCase()}</div>
 				<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
 			</div>
 
@@ -43,11 +45,22 @@ function Overview(props) {
 				</section>
 			</div>
 
+			<div className={styles['steps']}>
+				{STEPS_INFO.map((step, index) => 
+					<OverviewSteps 
+						key={index} 
+						stepTitle={`STEP ${++index}`} 
+						stepDescription={step.description}
+						imagePath={step.imagePath}
+					/>
+				)}
+			</div>
+
 			<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
 		</>
 	);
 }
 
-Overview.propTypes = propTypes;
+Overview.propTypes = overviewPropTypes;
 
 export default Overview;

@@ -11,7 +11,7 @@
   background-color: rgba(46, 26, 4, 1);
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/images/pokemon-header.png');
+  background-image: url('../../assets/images/pokemon-header.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -24,6 +24,10 @@
 
 .header-container > .header-title {
   text-shadow: 2px 2px 5px lightblue;
+}
+
+.header-container > .header-subtitle {
+  text-shadow: 2px 2px 1px black;
 }
 
 button.go-to-selection {
@@ -55,4 +59,20 @@ div.feature-list {
   padding: 16px 0;
   margin: 0 10%;
   font-size: 1em;
+}
+
+.steps {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@media only screen and (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 }

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
-import Overview from './components/Overview';
+import Overview from './components/overview/Overview';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Overview title={'Pokemon Battle'} subtitle={'Test your skills '}/>
+            <Overview title={'Pokemon Battle'} subtitle={'Test your skills building a Pokemon application'}/>
           </Route>
           <Route path="/selection">
             <div>This route will be used for Pokemon selection.</div>
