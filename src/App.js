@@ -1,25 +1,31 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import { Provider as ReduxProvider } from "react-redux";
+import configureStore from "./containers/App/store";
+
 import './App.css';
 
 import Overview from './components/overview/Overview';
 import Selection from './components/selection/Selection';
+const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <Overview title={'Pokemon Battle'} subtitle={'Test your skills building a Pokemon application'}/>
-          </Route>
-          <Route path="/selection">
-            <Selection title={'Select your Pokemon'} limit={50} offset={20} />                    
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <ReduxProvider store={reduxStore}>
+      <div className="App">
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <Overview title={'Pokemon Battle'} subtitle={'Test your skills building a Pokemon application'}/>
+            </Route>
+            <Route path="/selection">
+              <Selection title={'Select your Pokemon'} limit={50} offset={20} />                    
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </ReduxProvider>
   );
 }
 
