@@ -1,17 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
 
-* {
+.step-container {
   font-family: 'Big Shoulders Text', Arial, Helvetica, sans-serif, sans-serif;
   color: black;
   text-align: center;
-}
-
-.step-container {
   margin: 8px 16px;
   padding: 8px;
   flex: 1 1 0;
   height: auto;
   width: auto;
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -28,5 +26,5 @@
 }
 
 .step-title, .step-description {
-  text-align: center;
+  text-align: center !important;
 }

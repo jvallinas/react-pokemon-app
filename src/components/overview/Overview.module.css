@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
 
-* {
-  text-align: initial;
-}
-
 .header-container {
   height: 400px;
   width: 100%;
@@ -53,6 +49,7 @@ button.go-to-selection {
 .section-title, .description {
   color: black;
   font-family: 'Big Shoulders Text', cursive, sans-serif;
+  text-align: initial;
 }
 
 div.feature-list {
@@ -65,7 +62,6 @@ div.feature-list {
   padding: 16px 0;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-around;
 }
 

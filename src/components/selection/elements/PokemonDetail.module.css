@@ -14,7 +14,7 @@
   }
 }
 
-.pokemon-image-container {
+.pokemon-image-container, .loading-image-placeholder {
   margin: 16px 24px;
   border-radius: 50%;
   width: 150px;

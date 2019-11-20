@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
 
-* {
+.title, .filter-container, .pokemon-container {
   font-family: 'Big Shoulders Text', Arial, Helvetica, sans-serif, sans-serif;
   color: black;
   text-align: initial;
@@ -9,6 +9,7 @@
 .title {
   font-size: 3em;
   color: black;
+  margin-left: 24px;
 }
 
 .pokemon-container {
