@@ -16,7 +16,7 @@ export default function useDebounceInput(input, delay) {
       };
     },
     // Only re-call effect when input changes
-    [input]
+    [input, delay]
   );
 
   return debouncedInput;

@@ -7,9 +7,12 @@ const defaultState = {
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTION_TYPES.SET_POKEMON_LIST: {
-      state.pokemonList.push([...action.payload]);
-      const newState = Object.assign({}, state);
-      return newState;
+      if (state.pokemonList.length === 0) {
+        const newState = Object.assign({}, state);
+        newState.pokemonList.push(...action.payload);
+        return newState;
+      }
+      return state;
     }
     default:
       return state;

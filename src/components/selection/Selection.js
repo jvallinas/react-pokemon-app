@@ -7,11 +7,24 @@ import PokemonDetail from './elements/PokemonDetail';
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useDebounceInput from '../../hooks/useDebounceInput';
 
+import ACTIONS from '../../containers/App/actions/actions.js';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+	pokemons: state.pokemonList
+});
+
+const mapDispatchToProps = dispatch => ({
+	setPokemonList: items => dispatch(ACTIONS.setPokemonList(items)),
+});
+  
 const selectionPropTypes = {
 	limit: PropTypes.number,
 	offset: PropTypes.number,
 	title: PropTypes.string,
-	imagePath: PropTypes.string
+	imagePath: PropTypes.string,
+	pokemons: PropTypes.array,
+	setPokemonList: PropTypes.func
 }
 
 function Selection(props) {
@@ -26,12 +39,21 @@ function Selection(props) {
 	useEffect(
 		() => {
 			if (response) {
+			props.setPokemonList(response.results);
+			}
+		}, [response, props]
+	);
+
+	// Filtering the response data according to the last debounced input
+	useEffect(
+		() => {
+			if (props.pokemons) {
 				setListToDisplay(debouncedCurrentSearch
-					? response.results.filter(pokemon => pokemon.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1)
-					: response.results
+					? props.pokemons.filter(pokemon => pokemon.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1)
+					: props.pokemons
 				);
 			}
-		}, [debouncedCurrentSearch, response]
+		}, [debouncedCurrentSearch, props.pokemons]
 	);
 
 	return (
@@ -53,11 +75,8 @@ function Selection(props) {
 				</div>
 			}
 
-			{listToDisplay
-				.map((pokemon) => (
-					<PokemonDetail key={pokemon.name} 
-						pokemonName={pokemon.name}
-					/>
+			{listToDisplay.map((pokemon) => (
+					<PokemonDetail key={pokemon.name} pokemonName={pokemon.name}/>
 				))
 			}
 		</>
@@ -66,4 +85,7 @@ function Selection(props) {
 
 Selection.propTypes = selectionPropTypes;
 
-export default Selection;
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Selection);
