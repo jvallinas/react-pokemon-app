@@ -19,9 +19,9 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path={ROUTES.APP.ROOT}>
-              <Overview title={'Pokemon Battle'} subtitle={'Test your skills building a Pokemon application'}/>
+              <Overview title={'Pokemon Battle'} subtitle={'Test your skills by building a Pokemon application'}/>
             </Route>
-            <Route path={ROUTES.APP.SELECTION}>
+            <Route path={ROUTES.APP.SELECTION.INDEX}>
               <Selection title={'Select your Pokemon'} limit={25} offset={0} />                    
             </Route>
           </Switch>
