@@ -3,12 +3,27 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Overview.module.css';
 
-import OverviewSteps, {STEPS_INFO} from './OverviewSteps';
+import OverviewStep from './elements/OverviewStep';
 
 const overviewPropTypes = {
 	title: PropTypes.string,
 	subtitle: PropTypes.string
-}
+};
+
+const STEPS_INFO = [
+	{
+		imagePath: 'images/pachirisu.png',
+		description: 'Info for the first step'
+	},
+	{
+		imagePath: 'images/pachirisu.png',
+		description: 'Info for the second step'
+	},
+	{
+		imagePath: 'images/pachirisu.png',
+		description: 'Info for the third and final step'
+	}
+];
 
 const Overview = ({title, subtitle}) => {
 	useEffect(() => {
@@ -47,7 +62,7 @@ const Overview = ({title, subtitle}) => {
 
 			<div className={styles['steps']}>
 				{STEPS_INFO.map((step, index) => 
-					<OverviewSteps 
+					<OverviewStep
 						key={index} 
 						stepTitle={`STEP ${++index}`} 
 						stepDescription={step.description}
