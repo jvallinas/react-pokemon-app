@@ -10,7 +10,6 @@ const pokemonDetailPropTypes = {
 }
 
 const InputText = ({ className, placeholder, currentValue, onChangeHandler }) => {
-
   return (
     <>
       <input type="text" className={styles[className]}
@@ -23,4 +22,4 @@ const InputText = ({ className, placeholder, currentValue, onChangeHandler }) =>
 
 InputText.propTypes = pokemonDetailPropTypes;
 
-export default InputText;
+export default React.memo(InputText);

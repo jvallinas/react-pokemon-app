@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Selection.module.css';
 
@@ -57,9 +57,9 @@ const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
 	);
 
 	/* Event handler for updating search term */
-	const updateSearchTermHandler = (e) => {
+	const updateSearchTermHandler = useCallback((e) => {
 		setCurrentSearch(e.target.value)
-	};
+	}, []);
 
 	return (
 		<>
