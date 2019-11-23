@@ -30,4 +30,4 @@ const PokemonDetail = ({pokemonName, pokemonId, imagePath}) => {
 
 PokemonDetail.propTypes = pokemonDetailPropTypes;
 
-export default PokemonDetail;
+export default React.memo(PokemonDetail);
