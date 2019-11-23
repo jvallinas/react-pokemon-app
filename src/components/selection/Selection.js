@@ -35,7 +35,7 @@ const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
 	const [currentSearch, setCurrentSearch] = useState('');
 	const debouncedCurrentSearch = useDebounceInput(currentSearch, 300);
 
-	// Filtering the response data according to the last debounced input
+	// Adding received data from backend to Redux store
 	useEffect(
 		() => {
 			if (response) {
