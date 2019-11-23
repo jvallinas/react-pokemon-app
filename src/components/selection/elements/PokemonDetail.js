@@ -8,9 +8,11 @@ const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string,
   pokemonId: PropTypes.number,
   imagePath: PropTypes.string,
+  pokemonDescription: PropTypes.string
 }
 
-const PokemonDetail = ({pokemonName, pokemonId, imagePath}) => {
+
+const PokemonDetail = ({pokemonName, pokemonId, imagePath, pokemonDescription}) => {
 
   let urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);

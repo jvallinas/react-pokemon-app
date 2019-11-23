@@ -28,6 +28,10 @@ const selectionPropTypes = {
 }
 
 const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
+	useEffect(() => {
+		document.title = title;
+	}, [title]);
+	
 	const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
 	const { response, error, isLoading } = useHttpRequest(urlSelection);
 
@@ -82,10 +86,13 @@ const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
 				</div>
 			}
 
-			{listToDisplay.map((pokemon) => (
+			<div className={styles['pokemons-container']}>
+			{
+				listToDisplay.map((pokemon) => (
 					<PokemonDetail key={pokemon.name} pokemonName={pokemon.name}/>
 				))
 			}
+			</div>
 		</>
 	);
 }

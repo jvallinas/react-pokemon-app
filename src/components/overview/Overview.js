@@ -12,8 +12,8 @@ const overviewPropTypes = {
 
 const Overview = ({title, subtitle}) => {
 	useEffect(() => {
-		document.title = `Welcome to the React Pokemon App`;
-	}, []);
+		document.title = title;
+	}, [title]);
 
 	let history = useHistory();
 	const navigateToSelection = () => history.push('/selection');
