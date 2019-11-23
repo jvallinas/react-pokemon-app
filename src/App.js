@@ -6,8 +6,8 @@ import configureStore from "./containers/App/store";
 
 import './App.css';
 
-import Overview from './components/overview/Overview';
-import Selection from './components/selection/Selection';
+import { Overview, Selection } from "./views";
+
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 const App = () => {

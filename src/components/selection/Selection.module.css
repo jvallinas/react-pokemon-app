@@ -37,8 +37,3 @@
   font-weight: bold;
   margin-bottom: 8px;
 }
-
-input[type="text"].filter {
-  padding: 8px;
-  background-color: whitesmoke;
-}

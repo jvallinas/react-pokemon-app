@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Selection.module.css';
 
 import PokemonDetail from './elements/PokemonDetail';
+import InputText from '../_elements/InputText';
 
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useDebounceInput from '../../hooks/useDebounceInput';
@@ -55,6 +56,11 @@ const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
 		}, [debouncedCurrentSearch, pokemons]
 	);
 
+	/* Event handler for updating search term */
+	const updateSearchTermHandler = (e) => {
+		setCurrentSearch(e.target.value)
+	};
+
 	return (
 		<>
 			<h1 className={styles['title']}>{title.toUpperCase()}</h1>
@@ -67,10 +73,12 @@ const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
 			{response &&
 				<div className={styles['filter-container']}>
 					<div className={styles.search}>SEARCH</div>
-					<input type="text" className={styles.filter} 
-						placeholder="Name" 
-						value={currentSearch} 
-						onChange={(e) => setCurrentSearch(e.target.value)}></input>
+					<InputText 
+						className='selection-filter'
+						placeholder='Search by name...'
+						currentValue={currentSearch}
+						onChangeHandler={updateSearchTermHandler} 
+					/>
 				</div>
 			}
 
