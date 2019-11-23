@@ -10,9 +10,9 @@ const pokemonDetailPropTypes = {
   imagePath: PropTypes.string,
 }
 
-function PokemonDetail(props) {
+const PokemonDetail = ({pokemonName, pokemonId, imagePath}) => {
 
-  let urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${props.pokemonName}`;
+  let urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);
 
   return (
@@ -21,7 +21,7 @@ function PokemonDetail(props) {
         <img className={styles['pokemon-image-container']} 
           src={pokemonData && pokemonData.sprites && pokemonData.sprites.front_default} alt=""/>
 
-        <h1 className={styles['pokemon-title']}>{props.pokemonName}</h1>
+        <h1 className={styles['pokemon-title']}>{pokemonName}</h1>
         {pokemonData && <h1 className={styles['pokemon-id']}>{pokemonData.id}</h1>}
       </div>
     </>

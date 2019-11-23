@@ -10,7 +10,7 @@ import Overview from './components/overview/Overview';
 import Selection from './components/selection/Selection';
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
-function App() {
+const App = () => {
   return (
     <ReduxProvider store={reduxStore}>
       <div className="App">

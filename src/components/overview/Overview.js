@@ -10,7 +10,7 @@ const overviewPropTypes = {
 	subtitle: PropTypes.string
 }
 
-function Overview(props) {
+const Overview = ({title, subtitle}) => {
 	useEffect(() => {
 		document.title = `Welcome to the React Pokemon App`;
 	}, []);
@@ -21,8 +21,8 @@ function Overview(props) {
 	return (
 		<>
 			<div className={styles['header-container']}>
-				<h1 className={styles['header-title']}>{props.title.toUpperCase()}</h1>
-				<div className={styles['header-subtitle']}>{props.subtitle.toUpperCase()}</div>
+				<h1 className={styles['header-title']}>{title.toUpperCase()}</h1>
+				<div className={styles['header-subtitle']}>{subtitle.toUpperCase()}</div>
 				<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
 			</div>
 

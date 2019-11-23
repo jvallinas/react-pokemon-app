@@ -22,13 +22,12 @@ const selectionPropTypes = {
 	limit: PropTypes.number,
 	offset: PropTypes.number,
 	title: PropTypes.string,
-	imagePath: PropTypes.string,
 	pokemons: PropTypes.array,
 	setPokemonList: PropTypes.func
 }
 
-function Selection(props) {
-	const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${props.limit}&offset=${props.offset}`;
+const Selection = ({ limit, offset, pokemons, setPokemonList, title }) => {
+	const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
 	const { response, error, isLoading } = useHttpRequest(urlSelection);
 
 	const [listToDisplay, setListToDisplay] = useState([]);
@@ -39,26 +38,26 @@ function Selection(props) {
 	useEffect(
 		() => {
 			if (response) {
-			props.setPokemonList(response.results);
+			setPokemonList(response.results);
 			}
-		}, [response, props]
+		}, [response, setPokemonList]
 	);
 
 	// Filtering the response data according to the last debounced input
 	useEffect(
 		() => {
-			if (props.pokemons) {
+			if (pokemons) {
 				setListToDisplay(debouncedCurrentSearch
-					? props.pokemons.filter(pokemon => pokemon.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1)
-					: props.pokemons
+					? pokemons.filter(pokemon => pokemon.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1)
+					: pokemons
 				);
 			}
-		}, [debouncedCurrentSearch, props.pokemons]
+		}, [debouncedCurrentSearch, pokemons]
 	);
 
 	return (
 		<>
-			<h1 className={styles['title']}>{props.title.toUpperCase()}</h1>
+			<h1 className={styles['title']}>{title.toUpperCase()}</h1>
 
 			{isLoading && <div>Loading data...</div>}
 

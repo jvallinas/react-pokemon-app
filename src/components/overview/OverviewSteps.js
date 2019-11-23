@@ -23,13 +23,13 @@ export const STEPS_INFO = [
 	}
 ];
 
-function OverviewSteps(props) {
+const OverviewSteps = ({imagePath, stepTitle, stepDescription}) => {
 	return (
 		<>
 			<div className={styles['step-container']}>
-				<img className={styles['step-image-container']} src={props.imagePath} alt=""></img>
-				<h1 className={styles['step-title']}>{props.stepTitle}</h1>
-				<div className={styles['step-description']}>{props.stepDescription}</div>
+				<img className={styles['step-image-container']} src={imagePath} alt=""></img>
+				<h1 className={styles['step-title']}>{stepTitle}</h1>
+				<div className={styles['step-description']}>{stepDescription}</div>
 			</div>
 		</>
 	);
