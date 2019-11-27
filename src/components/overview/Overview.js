@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Overview.module.css';
 
+import BaseButton from '../_elements/BaseButton';
 import OverviewStep from './elements/OverviewStep';
 
 const overviewPropTypes = {
@@ -38,7 +39,7 @@ const Overview = ({title, subtitle}) => {
 			<div className={styles['header-container']}>
 				<h1 className={styles['header-title']}>{title.toUpperCase()}</h1>
 				<div className={styles['header-subtitle']}>{subtitle.toUpperCase()}</div>
-				<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
+				<BaseButton label={`Let's do it!`} onClickHandler={navigateToSelection} uppercase purple />
 			</div>
 
 			<div className={styles['feature-list']}>
@@ -71,7 +72,7 @@ const Overview = ({title, subtitle}) => {
 				)}
 			</div>
 
-			<button className={styles['go-to-selection']} onClick={navigateToSelection}>{`LET'S DO IT!`}</button>
+			<BaseButton label={`Let's do it!`} onClickHandler={navigateToSelection} uppercase purple />
 		</>
 	);
 }
