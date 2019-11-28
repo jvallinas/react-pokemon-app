@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import styles from './Selection.module.css';
 
 import PokemonDetail from './elements/PokemonDetail';
@@ -11,29 +11,18 @@ import useDebounceInput from '../../hooks/useDebounceInput';
 
 import ACTIONS from '../../containers/App/actions/actions';
 
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemonList,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setPokemonList: (items) => dispatch(ACTIONS.setPokemonList(items)),
-});
-
 const selectionPropTypes = {
   limit: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  pokemons: PropTypes.arrayOf(PropTypes.object),
-  setPokemonList: PropTypes.func.isRequired,
-};
-
-const selectionDefaultProps = {
-  pokemons: undefined,
 };
 
 const Selection = ({
-  limit, offset, pokemons, setPokemonList, title,
+  limit, offset, title,
 }) => {
+  const pokemons = useSelector((state) => state.pokemonList);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -49,9 +38,9 @@ const Selection = ({
   useEffect(
     () => {
       if (response) {
-        setPokemonList(response.results);
+        dispatch(ACTIONS.setPokemonList(response.results));
       }
-    }, [response, setPokemonList],
+    }, [dispatch, response],
   );
 
   // Filtering the response data according to the last debounced input
@@ -103,10 +92,6 @@ const Selection = ({
   );
 };
 
-Selection.defaultProps = selectionDefaultProps;
 Selection.propTypes = selectionPropTypes;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Selection);
+export default connect()(Selection);
