@@ -1,7 +1,7 @@
-import ACTION_TYPES from "../actionTypes/actionTypes";
+import ACTION_TYPES from '../actionTypes/actionTypes';
 
 const defaultState = {
-  pokemonList: []
+  pokemonList: [],
 };
 
 const { SET_POKEMON_LIST } = ACTION_TYPES;
@@ -12,8 +12,8 @@ const reducer = (state = defaultState, action) => {
       const listIsNotInitialized = Boolean(state.pokemonList.length === 0);
 
       if (listIsNotInitialized) {
-        const {payload: pokemons} = action;
-        const newState = {...state};
+        const { payload: pokemons } = action;
+        const newState = { ...state };
         newState.pokemonList = [...pokemons];
         return newState;
       }

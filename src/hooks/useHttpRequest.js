@@ -14,9 +14,8 @@ const useHttpRequest = (url, options) => {
         const res = await fetch(url, options);
         const json = await res.json();
         setResponse(json);
-      }
-      catch (error) {
-        setError(error);
+      } catch (err) {
+        setError(err);
       }
       setIsLoading(false);
       setIsRequestActivated(false);
@@ -28,7 +27,9 @@ const useHttpRequest = (url, options) => {
 
   const activateRequest = () => setIsRequestActivated(true);
 
-  return { response, error, isLoading, activateRequest };
+  return {
+    response, error, isLoading, activateRequest,
+  };
 };
 
 export default useHttpRequest;

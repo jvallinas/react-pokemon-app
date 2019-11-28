@@ -8,22 +8,28 @@ const baseButtonPropTypes = {
 
   // Style props
   uppercase: PropTypes.bool,
-  purple: PropTypes.bool
-}
+  purple: PropTypes.bool,
+};
 
 const BaseButton = ({ label, onClickHandler, ...styleProps }) => {
-  
-  const stylesList = styleProps && Object.keys(styleProps).map(c => styles[c]).join(' ');
+  const stylesList = styleProps && Object.keys(styleProps).map((c) => styles[c]).join(' ');
   return (
     <>
-      <button 
+      <button
+        type="button"
         className={stylesList}
-        onClick={onClickHandler} 
-      >{label}</button>
+        onClick={onClickHandler}
+      >
+        {label}
+      </button>
     </>
   );
-}
+};
 
+BaseButton.defaultProps = {
+  uppercase: false,
+  purple: false,
+};
 BaseButton.propTypes = baseButtonPropTypes;
 
 export default React.memo(BaseButton);

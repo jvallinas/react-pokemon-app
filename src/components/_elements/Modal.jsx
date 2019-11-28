@@ -4,19 +4,21 @@ import styles from './Modal.module.css';
 
 const modalPropTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  onModalClose: PropTypes.func,
-  show: PropTypes.bool
-}
+  onModalClose: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+};
 
 // TODO improve accessibility features or find a modal library
 const Modal = ({ onModalClose, show, children }) => {
   const modalStatusClass = show ? 'modal-visible' : 'modal-hidden';
 
   return (
-    <div className={styles[modalStatusClass] }>
+    <div className={styles[modalStatusClass]}>
       <section className={styles['modal-frame']}>
         {children}
-        <button className={styles.close}
+        <button
+          type="button"
+          className={styles.close}
           onClick={onModalClose}
         >
           Close
@@ -26,6 +28,7 @@ const Modal = ({ onModalClose, show, children }) => {
   );
 };
 
+Modal.defaultProps = { show: false };
 Modal.propTypes = modalPropTypes;
 
 export default Modal;
