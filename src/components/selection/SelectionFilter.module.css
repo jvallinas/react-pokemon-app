@@ -1,0 +1,14 @@
+.filter-container {
+  width: 90%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  color: black;
+  text-align: initial;
+  border: 1px solid black;
+  padding: 24px;
+}
+
+.search {
+  font-weight: bold;
+  margin-bottom: 8px;
+}

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styles from './Selection.module.css';
 
 import PokemonDetail from './elements/PokemonDetail';
-import InputText from '../_elements/InputText';
+import SelectionFilter from './SelectionFilter';
 
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useDebounceInput from '../../hooks/useDebounceInput';
@@ -23,8 +23,12 @@ const selectionPropTypes = {
   limit: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  pokemons: PropTypes.arrayOf.isRequired,
+  pokemons: PropTypes.arrayOf(PropTypes.object),
   setPokemonList: PropTypes.func.isRequired,
+};
+
+const selectionDefaultProps = {
+  pokemons: undefined,
 };
 
 const Selection = ({
@@ -78,30 +82,28 @@ const Selection = ({
 
       {/* FILTER SECTION */}
 
-      {response
-				&& (
-<div className={styles['filter-container']}>
-  <div className={styles.search}>SEARCH</div>
-  <InputText
-    className="selection-filter"
-    placeholder="Search by name..."
-    currentValue={currentSearch}
-    onChangeHandler={updateSearchTermHandler}
-  />
-</div>
-				)}
+      {response && (
+        <SelectionFilter
+          currentSearch={currentSearch}
+          updateSearchTermHandler={updateSearchTermHandler}
+        />
+      )}
 
       <div className={styles['pokemons-container']}>
         {
-				listToDisplay.map((pokemon) => (
-  <PokemonDetail key={pokemon.name} pokemonName={pokemon.name} />
-				))
+        listToDisplay.map((pokemon) => (
+          <PokemonDetail
+            key={pokemon.name}
+            pokemonName={pokemon.name}
+          />
+        ))
 			}
       </div>
     </>
   );
 };
 
+Selection.defaultProps = selectionDefaultProps;
 Selection.propTypes = selectionPropTypes;
 
 export default connect(

@@ -5,19 +5,16 @@ import styles from './BaseButton.module.css';
 const baseButtonPropTypes = {
   label: PropTypes.string.isRequired,
   onClickHandler: PropTypes.func.isRequired,
-
-  // Style props
-  uppercase: PropTypes.bool,
-  purple: PropTypes.bool,
+  styleOptions: PropTypes.arrayOf(PropTypes.string),
 };
 
-const BaseButton = ({ label, onClickHandler, ...styleProps }) => {
-  const stylesList = styleProps && Object.keys(styleProps).map((c) => styles[c]).join(' ');
+const BaseButton = ({ label, onClickHandler, styleOptions }) => {
+  const mappedStyleClasses = styleOptions.map((option) => styles[option]).join(' ');
   return (
     <>
       <button
         type="button"
-        className={stylesList}
+        className={mappedStyleClasses}
         onClick={onClickHandler}
       >
         {label}
@@ -27,8 +24,7 @@ const BaseButton = ({ label, onClickHandler, ...styleProps }) => {
 };
 
 BaseButton.defaultProps = {
-  uppercase: false,
-  purple: false,
+  styleOptions: [''],
 };
 BaseButton.propTypes = baseButtonPropTypes;
 

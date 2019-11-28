@@ -8,7 +8,7 @@ import BaseButton from '../../_elements/BaseButton';
 
 const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string.isRequired,
-  pokemonId: PropTypes.number,
+  pokemonId: PropTypes.string,
   imagePath: PropTypes.string,
   pokemonDescription: PropTypes.string,
 };
@@ -38,9 +38,13 @@ const PokemonDetail = ({
         />
 
         <h1 className={styles['pokemon-title']}>{pokemonName}</h1>
-        {pokemonData && <h1 className={styles['pokemon-id']}>{pokemonData.id}</h1>}
 
-        <BaseButton label="Select" onClickHandler={goToPokemonDetail} uppercase />
+        {pokemonData && (
+          <>
+            <h1 className={styles['pokemon-id']}>{pokemonData.id}</h1>
+            <BaseButton label="Select" onClickHandler={goToPokemonDetail} styleOptions={['uppercase']} />
+          </>
+        )}
 
       </div>
     </>
