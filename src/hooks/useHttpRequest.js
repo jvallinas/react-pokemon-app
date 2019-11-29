@@ -5,7 +5,8 @@ const useHttpRequest = (url, options) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [isRequestActivated, setIsRequestActivated] = useState(true);
+  const initialRequest = !options || !options.isDataSet;
+  const [isRequestActivated, setIsRequestActivated] = useState(initialRequest);
 
   useEffect(() => {
     const fetchData = async () => {

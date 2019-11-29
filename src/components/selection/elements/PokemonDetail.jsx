@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+
+import { connect, useDispatch, useSelector } from 'react-redux';
+
 import styles from './PokemonDetail.module.css';
 
 import useHttpRequest from '../../../hooks/useHttpRequest';
 import BaseButton from '../../_elements/BaseButton';
+
+import ACTIONS from '../../../containers/App/actions/actions';
 
 const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string.isRequired,
@@ -22,11 +27,22 @@ const pokemonDetailDefaultProps = {
 const PokemonDetail = ({
   pokemonName, pokemonId, imagePath, pokemonDescription,
 }) => {
+  const dispatch = useDispatch();
+
   const urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);
 
   const history = useHistory();
   const goToPokemonDetail = () => history.push(`/selection/${pokemonName}`);
+
+  // Adding received data from backend to Redux store
+  useEffect(
+    () => {
+      if (pokemonData) {
+        dispatch(ACTIONS.setPokemonDetail(pokemonData));
+      }
+    }, [dispatch, pokemonData],
+  );
 
   return (
     <>
@@ -54,4 +70,4 @@ const PokemonDetail = ({
 PokemonDetail.defaultProps = pokemonDetailDefaultProps;
 PokemonDetail.propTypes = pokemonDetailPropTypes;
 
-export default React.memo(PokemonDetail);
+export default connect()(React.memo(PokemonDetail));
