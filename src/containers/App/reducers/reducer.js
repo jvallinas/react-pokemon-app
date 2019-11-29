@@ -1,16 +1,25 @@
 import ACTION_TYPES from '../actionTypes/actionTypes';
 
 const defaultState = {
+  availableTypes: [],
   pokemonList: [],
+  pokemonByName: [],
 };
 
 const { SET_POKEMON_LIST, SET_POKEMON_DETAIL } = ACTION_TYPES;
 
-const parseTypes = (typesPayload) => {
+const availableTypes = new Set();
+
+const parseTypes = (typesPayload, state) => {
   const types = {};
+  const newState = state;
   typesPayload.map((item) => item.type.name).forEach((type, index) => {
     types[`type${index + 1}`] = type;
+
+    availableTypes.add(type);
+    newState.availableTypes = [...availableTypes];
   });
+
   return types;
 };
 
@@ -51,16 +60,23 @@ const reducer = (state = defaultState, action) => {
     case SET_POKEMON_DETAIL: {
       const { name, types, stats } = action.payload;
 
+      let currentPokemonDetails;
+
       const updatedPokemonList = state.pokemonList.map((pokemon) => {
         if (pokemon.name === name) {
-          return { ...pokemon, ...parseTypes(types), ...parseStats(stats) };
+          currentPokemonDetails = {
+            ...pokemon,
+            ...parseTypes(types, state),
+            ...parseStats(stats),
+          };
+          return currentPokemonDetails;
         }
         return pokemon;
       });
 
       const newState = {
         ...state,
-        pokemonByName: { [name]: updatedPokemonList },
+        pokemonByName: { ...state.pokemonByName, [name]: currentPokemonDetails },
         pokemonList: updatedPokemonList,
       };
 
