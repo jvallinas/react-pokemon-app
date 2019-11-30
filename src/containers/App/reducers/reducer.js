@@ -1,12 +1,18 @@
 import ACTION_TYPES from '../actionTypes/actionTypes';
 
+const { SET_POKEMON_LIST, SET_POKEMON_DETAIL } = ACTION_TYPES;
+
 const defaultState = {
-  availableTypes: [],
   pokemonList: [],
-  pokemonByName: [],
+
+  // Array with all unique pokemon types
+  availableTypes: [],
+
+  // Object that will be filled with pokemon names as keys for easier data access
+  pokemonByName: {},
 };
 
-const { SET_POKEMON_LIST, SET_POKEMON_DETAIL } = ACTION_TYPES;
+/** UTILS */
 
 const availableTypes = new Set();
 
@@ -25,7 +31,7 @@ const parseTypes = (typesPayload, state) => {
 
 const parseStats = (statsPayload) => {
   const stats = {};
-  statsPayload.forEach((item, index) => {
+  statsPayload.forEach((item) => {
     switch (item.stat.name) {
       case 'attack':
       case 'defense':
@@ -41,29 +47,43 @@ const parseStats = (statsPayload) => {
   return stats;
 };
 
+const removeDuplicates = (list, id) => {
+  if (list.length === 0) return list;
+  return list.filter((item, index, self) => self.findIndex((i) => i[id] === item[id]) === index);
+};
+
+const retrieveIdFromUrl = (url) => {
+  const parsedId = parseInt(url.replace('https://pokeapi.co/api/v2/pokemon/', ''), 10);
+  return parsedId;
+};
+
+/** REDUCER FUNCTION */
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case SET_POKEMON_LIST: {
-      const listIsNotInitialized = Boolean(state.pokemonList.length === 0);
+      const { payload: newPokemons } = action;
 
-      if (listIsNotInitialized) {
-        const { payload: pokemons } = action;
-        const newState = {
-          ...state,
-          pokemonList: [...pokemons],
-        };
-        return newState;
-      }
-      return state;
+      newPokemons.forEach((pokemon) => {
+        const currentPokemon = pokemon;
+        currentPokemon.id = currentPokemon.id || retrieveIdFromUrl(pokemon.url);
+      });
+      const newPokemonList = [...state.pokemonList, ...newPokemons];
+      const parsedNewPokemonList = removeDuplicates(newPokemonList, 'name');
+
+      const newState = {
+        ...state,
+        pokemonList: parsedNewPokemonList,
+      };
+      return newState;
     }
 
     case SET_POKEMON_DETAIL: {
-      const { name, types, stats } = action.payload;
+      const { name: payloadName, types, stats } = action.payload;
 
       let currentPokemonDetails;
 
       const updatedPokemonList = state.pokemonList.map((pokemon) => {
-        if (pokemon.name === name) {
+        if (pokemon.name === payloadName) {
           currentPokemonDetails = {
             ...pokemon,
             ...parseTypes(types, state),
@@ -76,7 +96,7 @@ const reducer = (state = defaultState, action) => {
 
       const newState = {
         ...state,
-        pokemonByName: { ...state.pokemonByName, [name]: currentPokemonDetails },
+        pokemonByName: { ...state.pokemonByName, [payloadName]: currentPokemonDetails },
         pokemonList: updatedPokemonList,
       };
 

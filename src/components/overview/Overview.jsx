@@ -42,7 +42,7 @@ const Overview = ({ title, subtitle }) => {
       <div className={styles['header-container']}>
         <h1 className={styles['header-title']}>{title.toUpperCase()}</h1>
         <div className={styles['header-subtitle']}>{subtitle.toUpperCase()}</div>
-        <BaseButton label={'Let\'s do it!'} onClickHandler={navigateToSelection} uppercase purple />
+        <BaseButton label={'Let\'s do it!'} onClickHandler={navigateToSelection} styleOptions={['uppercase', 'purple']} />
       </div>
 
       <div className={styles['feature-list']}>
@@ -57,7 +57,7 @@ const Overview = ({ title, subtitle }) => {
           <h1 className={styles['section-title']}>CHALLENGE</h1>
           <div className={styles.description}>
             We will be creating a model to instantiate new pokemons
-						and supply our application with data,
+            and supply our application with data,
 						having several fields such as their name, type, weakness and other stats.
           </div>
         </section>
@@ -82,7 +82,7 @@ const Overview = ({ title, subtitle }) => {
         ))}
       </div>
 
-      <BaseButton label={'Let\'s do it!'} onClickHandler={navigateToSelection} uppercase purple />
+      <BaseButton label={'Let\'s do it!'} onClickHandler={navigateToSelection} styleOptions={['uppercase', 'purple']} />
     </>
   );
 };

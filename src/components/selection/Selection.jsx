@@ -1,24 +1,42 @@
+// Core
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import styles from './Selection.module.css';
+import ACTIONS from '../../containers/App/actions/actions';
+import CONSTANTS from '../../constants';
 
+// UI
+import BaseButton from '../_elements/BaseButton';
 import PokemonDetail from './elements/PokemonDetail';
 import SelectionFilter from './SelectionFilter';
+import styles from './Selection.module.css';
 
+// Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useDebounceInput from '../../hooks/useDebounceInput';
 
-import ACTIONS from '../../containers/App/actions/actions';
-
 const selectionPropTypes = {
+  currentPage: PropTypes.number,
   limit: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  previousPageHandler: PropTypes.func.isRequired,
+  nextPageHandler: PropTypes.func.isRequired,
 };
 
+const selectionDefaultProps = {
+  currentPage: 0,
+};
+
+const {
+  SELECTION: {
+    PAGINATION: { ITEMS_PER_PAGE },
+  },
+} = CONSTANTS;
+
 const Selection = ({
-  limit, offset, title,
+  limit, offset, title, currentPage,
+  previousPageHandler, nextPageHandler,
 }) => {
   const pokemons = useSelector((state) => state.pokemonList);
   const dispatch = useDispatch();
@@ -28,11 +46,13 @@ const Selection = ({
   }, [title]);
 
   const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
-  const { response, error, isLoading } = useHttpRequest(urlSelection);
+  const {
+    response, error, isLoading, activateRequest,
+  } = useHttpRequest(urlSelection);
 
   const [listToDisplay, setListToDisplay] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
-  const debouncedCurrentSearch = useDebounceInput(currentSearch, 300);
+  const debouncedCurrentSearch = useDebounceInput(currentSearch, 500);
 
   // Adding received data from backend to Redux store
   useEffect(
@@ -43,7 +63,7 @@ const Selection = ({
     }, [dispatch, response],
   );
 
-  // Filtering the response data according to the last debounced input
+  // Filtering the data according to the last debounced input
   useEffect(
     () => {
       if (pokemons) {
@@ -51,9 +71,16 @@ const Selection = ({
           ? pokemons.filter(
             (p) => p.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1,
           )
-          : pokemons);
+          : pokemons.filter((p) => p.id > offset && p.id <= offset + ITEMS_PER_PAGE));
       }
-    }, [debouncedCurrentSearch, pokemons],
+    }, [debouncedCurrentSearch, pokemons, offset, currentPage],
+  );
+
+  // Triggers another http call on offset change to retrieve data for new page
+  useEffect(
+    () => {
+      activateRequest();
+    }, [offset, activateRequest],
   );
 
   /* Event handler for updating search term */
@@ -65,17 +92,30 @@ const Selection = ({
     <>
       <h1 className={styles.title}>{title.toUpperCase()}</h1>
 
-      {isLoading && <div>Loading data...</div>}
-
-      {error && <div>Error retrieving the list of Pokemons to select.</div>}
-
-      {/* FILTER SECTION */}
-
+      {/* FILTER & PAGINATION SECTION */}
       {response && (
-        <SelectionFilter
-          currentSearch={currentSearch}
-          updateSearchTermHandler={updateSearchTermHandler}
-        />
+        <>
+          <SelectionFilter
+            currentSearch={currentSearch}
+            updateSearchTermHandler={updateSearchTermHandler}
+          />
+          <div className={styles['pagination-container']}>
+            <BaseButton label="< Previous" onClickHandler={previousPageHandler} styleOptions={['purple', 'transparent']} />
+            <span className={styles['page-label']}>
+              {`Page ${currentPage}`}
+            </span>
+            <BaseButton label="Next >" onClickHandler={nextPageHandler} styleOptions={['purple', 'transparent']} />
+          </div>
+        </>
+      )}
+
+
+      {isLoading && <div className={styles.placeholder}>Loading data...</div>}
+
+      {error && (
+        <div className={styles.placeholder}>
+          Error retrieving the list of Pokemons to select.
+        </div>
       )}
 
       <div className={styles['pokemons-container']}>
@@ -92,6 +132,7 @@ const Selection = ({
   );
 };
 
+Selection.defaultProps = selectionDefaultProps;
 Selection.propTypes = selectionPropTypes;
 
 export default connect()(Selection);

@@ -26,7 +26,7 @@
   }
 }
 
-.filter-container, .pokemons-container{
+.filter-container, .pokemons-container, .pagination-container, .placeholder {
     width: 90%;
     margin: 0 auto;
     box-sizing: border-box;
@@ -42,10 +42,18 @@
   margin-bottom: 8px;
 }
 
-.pokemons-container {
+.pokemons-container, .pagination-container {
   margin-top: 8px;
   display: flex;
   flex-flow: wrap;
   box-sizing: border-box;
   justify-content: space-evenly;
+}
+
+.pagination-container {
+  padding: 8px;
+}
+
+.pagination-container > .page-label {
+  align-self: center;
 }

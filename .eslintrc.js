@@ -22,11 +22,9 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-    ],
     "rules": {
         "no-unused-vars": "warn",
-        "no-tabs": "off"
-    }
+        "no-tabs": "off",
+        "react/jsx-one-expression-per-line": [1,  { "allow": "single-child" }],
+  }
 };
