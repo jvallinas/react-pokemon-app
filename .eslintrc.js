@@ -26,5 +26,6 @@ module.exports = {
         "no-unused-vars": "warn",
         "no-tabs": "off",
         "react/jsx-one-expression-per-line": [1,  { "allow": "single-child" }],
+        "max-lines": ["warn", 250],
   }
 };

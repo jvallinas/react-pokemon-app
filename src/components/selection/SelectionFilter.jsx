@@ -7,9 +7,20 @@ import styles from './SelectionFilter.module.css';
 const selectionFilterPropTypes = {
   currentSearch: PropTypes.string.isRequired,
   updateSearchTermHandler: PropTypes.func.isRequired,
+  availableTypes: PropTypes.arrayOf(PropTypes.string),
+  selectedType: PropTypes.string,
+  updateSelectedTypeHandler: PropTypes.func,
 };
 
-const SelectionFilter = ({ currentSearch, updateSearchTermHandler }) => (
+const selectionFilterDefaultProps = {
+  availableTypes: [],
+  selectedType: '',
+  updateSelectedTypeHandler: (e) => { console.log('Selected type: ', e.target.value); },
+};
+
+const SelectionFilter = ({
+  currentSearch, updateSearchTermHandler, availableTypes, selectedType, updateSelectedTypeHandler,
+}) => (
   <div className={styles['filter-container']}>
     <div className={styles.search}>SEARCH</div>
     <InputText
@@ -18,9 +29,21 @@ const SelectionFilter = ({ currentSearch, updateSearchTermHandler }) => (
       currentValue={currentSearch}
       onChangeHandler={updateSearchTermHandler}
     />
+
+    <select
+      className={styles.type}
+      defaultValue='none'
+      onChange={updateSelectedTypeHandler}
+    >
+      <option value={'none'}>Select a Pokemon type</option>
+      {availableTypes.map((type) => (
+        <option key={type} value={type} onChange={updateSelectedTypeHandler}>{type}</option>
+      ))}
+    </select>
   </div>
 );
 
+SelectionFilter.defaultProps = selectionFilterDefaultProps;
 SelectionFilter.propTypes = selectionFilterPropTypes;
 
-export default SelectionFilter;
+export default React.memo(SelectionFilter);

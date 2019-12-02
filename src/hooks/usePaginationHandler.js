@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const usePaginationHandler = (itemsPerPage, offset) => {
   const initialOffset = offset >= 0 ? offset : 0;

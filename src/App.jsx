@@ -6,7 +6,7 @@ import './App.css';
 import { Provider as ReduxProvider } from 'react-redux';
 import { Overview, Selection } from './views';
 import ROUTES from './routes';
-import CONSTANTS from './constants';
+import CONSTANTS from './config.values';
 
 import configureStore from './containers/App/store';
 

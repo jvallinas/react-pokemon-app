@@ -8,7 +8,12 @@
   padding: 24px;
 }
 
-.search {
+.search, .type {
   font-weight: bold;
   margin-bottom: 8px;
+}
+
+.type {
+  padding: 8px;
+  margin: 16px;
 }
