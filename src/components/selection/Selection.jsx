@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { useRouteMatch, useHistory } from 'react-router-dom';
+
 import ACTIONS from '../../containers/App/actions/actions';
 import CONSTANTS from '../../config.values';
 
@@ -10,6 +12,7 @@ import BaseButton from '../_elements/BaseButton';
 import PokemonDetail from './elements/PokemonDetail';
 import SelectionFilter from './SelectionFilter';
 import styles from './Selection.module.css';
+import Modal from '../_elements/Modal';
 
 // Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';
@@ -36,6 +39,9 @@ const Selection = ({
   limit, offset, title, currentPage,
   previousPageHandler, nextPageHandler,
 }) => {
+  const match = useRouteMatch('/selection/:id');
+  const history = useHistory();
+
   const pokemons = useSelector((state) => state.pokemonList);
   const availableTypes = useSelector((state) => state.availableTypes);
   const dispatch = useDispatch();
@@ -96,6 +102,10 @@ const Selection = ({
     setSelectedType(e.target.value);
   }, []);
 
+  const goBackToSelection = useCallback(() => {
+    history.goBack();
+  }, [history]);
+
   return (
     <>
       <h1 className={styles.title}>{title.toUpperCase()}</h1>
@@ -135,6 +145,18 @@ const Selection = ({
         ))
 			}
       </div>
+
+      {/* SECTION FOR FULL DETAILS IN DIALOG FRAME */}
+      {match && (
+        <Modal show onModalClose={goBackToSelection}>
+          <h1 className={styles['pokemon-name']}>{match.params.id.toUpperCase()}</h1>
+          {/* TODO replace with full details when ready */}
+          <PokemonDetail
+            key={match.params.id}
+            pokemonName={match.params.id}
+          />
+        </Modal>
+      )}
     </>
   );
 };

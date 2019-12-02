@@ -44,7 +44,7 @@ button.close {
 }
 
 button.close::after {
-  font-size: 1.4em;
+  font-size: 1.2em;
   padding-left: 8px;
-  content: '\01F5D9';
+  content: 'X';
 }
