@@ -49,7 +49,7 @@ const Overview = ({ title, subtitle }) => {
         <section>
           <h1 className={styles['section-title']}>OBJECTIVE</h1>
           <div className={styles.description}>
-            {`The goal is to create a Pokemon application 
+            {`The goal is to create a Pokemon application
 						using the React framework and the Pokemon API.`}
           </div>
         </section>

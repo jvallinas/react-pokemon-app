@@ -40,7 +40,7 @@ const Selection = ({
   const availableTypes = useSelector((state) => state.availableTypes);
   const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState('');
-  
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -63,28 +63,21 @@ const Selection = ({
     }, [dispatch, response],
   );
 
-  // Setting pokemons to display in page
-  useEffect(
-    () => {
-      if (pokemons.length > 0) {
-        setListToDisplay(pokemons.filter((p) => p.id > offset && p.id <= offset + ITEMS_PER_PAGE));
-      }
-    }, [pokemons],
-  );
-
   // Filtering the data according to the last debounced input
+  // TODO improve filtering and add filtering by type
   useEffect(
     () => {
-      setListToDisplay(() => pokemons.filter((p) => p.id > offset && p.id <= offset + ITEMS_PER_PAGE));
-
+      setListToDisplay(
+        [...pokemons.filter((p) => p.id > offset && p.id <= offset + ITEMS_PER_PAGE)],
+      );
       if (debouncedCurrentSearch) {
-        setListToDisplay(() => pokemons.filter((p) => p.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1));
-      } else if (selectedType && selectedType !== 'none') {
-        setListToDisplay(listToDisplay => [...listToDisplay.filter((p) => p.type1 === selectedType ||  p.type2 === selectedType)]);
-      } else if (!selectedType || selectedType === 'none') {
-        setListToDisplay(() => pokemons.filter((p) => p.id > offset && p.id <= offset + ITEMS_PER_PAGE));
-      } 
-    }, [debouncedCurrentSearch, selectedType, offset],
+        setListToDisplay(
+          (list) => [...list.filter(
+            (p) => p.name.toUpperCase().indexOf(debouncedCurrentSearch.toUpperCase().trim()) !== -1,
+          )],
+        );
+      }
+    }, [debouncedCurrentSearch, pokemons, offset],
   );
 
   // Triggers another http call on offset change to retrieve data for new page
