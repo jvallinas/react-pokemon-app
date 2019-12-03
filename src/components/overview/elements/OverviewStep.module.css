@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
+
+.step-container {
+  font-family: 'Big Shoulders Text', Arial, Helvetica, sans-serif, sans-serif;
+  color: black;
+  text-align: center;
+  margin: 8px 16px;
+  padding: 8px;
+  flex: 1 1 0;
+  height: auto;
+  width: auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .step-container {
+    flex: 1 1 auto;
+  }
+}
+
+.step-image-container {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.step-title, .step-description {
+  text-align: center !important;
+}

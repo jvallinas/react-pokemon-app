@@ -1,0 +1,1 @@
+An app to get familiar with React using the Pokémon API

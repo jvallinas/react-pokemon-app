@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
+
+.header-container {
+  height: 400px;
+  width: 100%;
+  font-size: 2rem;
+  background-color: rgba(46, 26, 4, 1);
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../assets/images/pokemon-header.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-container > * {
+  font-family: 'Big Shoulders Text', Arial, Helvetica, sans-serif, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.header-container > .header-title {
+  text-shadow: 2px 2px 5px lightblue;
+}
+
+.header-container > .header-subtitle {
+  text-shadow: 2px 2px 1px black;
+}
+
+.header-container > button {
+  font-size: 0.5em;
+  margin-top: auto;
+  margin-bottom: 48px;
+  min-width: auto;
+  align-self: center;
+}
+
+.section-title, .description {
+  color: black;
+  font-family: 'Big Shoulders Text', cursive, sans-serif;
+  text-align: initial;
+}
+
+div.feature-list {
+  padding: 16px 0;
+  margin: 0 10%;
+  font-size: 1em;
+}
+
+.steps {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.steps + button {
+  margin-bottom: 48px;
+}
+
+@media only screen and (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

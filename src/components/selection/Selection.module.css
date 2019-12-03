@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Big+Shoulders+Text&display=swap');
+
+.title, .filter-container, .pokemon-container {
+  font-family: 'Big Shoulders Text', Arial, Helvetica, sans-serif, sans-serif;
+  color: black;
+  text-align: initial;
+}
+
+.title {
+  font-size: 3em;
+  color: black;
+  margin-left: 24px;
+}
+
+.pokemon-container {
+  margin: 8px 16px;
+  padding: 8px;
+  flex: 1 1 0;
+  height: auto;
+  width: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .pokemon-container {
+    flex: 1 1 auto;
+  }
+}
+
+.filter-container, .pokemons-container, .pagination-container, .placeholder {
+    width: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.filter-container {
+  border: 1px solid black;
+  padding: 24px;
+}
+
+.search {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.pokemons-container, .pagination-container {
+  margin-top: 8px;
+  display: flex;
+  flex-flow: wrap;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+}
+
+.pagination-container {
+  padding: 8px;
+}
+
+.pagination-container > .page-label {
+  align-self: center;
+}
