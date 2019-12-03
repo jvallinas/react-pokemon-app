@@ -5,7 +5,8 @@ const useHttpRequest = (url, options) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [isRequestActivated, setIsRequestActivated] = useState(true);
+  const initialRequest = !options || !options.isDataSet;
+  const [isRequestActivated, setIsRequestActivated] = useState(initialRequest);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,9 +15,8 @@ const useHttpRequest = (url, options) => {
         const res = await fetch(url, options);
         const json = await res.json();
         setResponse(json);
-      }
-      catch (error) {
-        setError(error);
+      } catch (err) {
+        setError(err);
       }
       setIsLoading(false);
       setIsRequestActivated(false);
@@ -28,7 +28,9 @@ const useHttpRequest = (url, options) => {
 
   const activateRequest = () => setIsRequestActivated(true);
 
-  return { response, error, isLoading, activateRequest };
+  return {
+    response, error, isLoading, activateRequest,
+  };
 };
 
 export default useHttpRequest;

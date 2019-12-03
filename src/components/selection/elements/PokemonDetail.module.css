@@ -3,9 +3,8 @@
   display: inline-block;
   margin: 8px 16px;
   padding: 8px;
-  flex: 1 1 0;
+  flex: 0 1 20%;
   height: auto;
-  width: auto;
 }
 
 @media only screen and (max-width: 768px) {
@@ -34,6 +33,16 @@
 }
 
 .pokemon-id::before {
-  content:'#'
+  content:'#';
 }
 
+div.placeholder-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.placeholder {
+  display: inline-block;
+  font-size: 3em;
+  color: lightgray;
+}

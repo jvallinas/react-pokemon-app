@@ -26,11 +26,15 @@
   }
 }
 
+.filter-container, .pokemons-container, .pagination-container, .placeholder {
+    width: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 .filter-container {
   border: 1px solid black;
-  width: auto;
   padding: 24px;
-  margin: 8px 24px;
 }
 
 .search {
@@ -38,7 +42,18 @@
   margin-bottom: 8px;
 }
 
-input[type="text"].filter {
+.pokemons-container, .pagination-container {
+  margin-top: 8px;
+  display: flex;
+  flex-flow: wrap;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+}
+
+.pagination-container {
   padding: 8px;
-  background-color: whitesmoke;
+}
+
+.pagination-container > .page-label {
+  align-self: center;
 }

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 export default function useDebounceInput(input, delay) {
-
   const [debouncedInput, setDebouncedInput] = useState(input);
 
   useEffect(
@@ -16,7 +15,7 @@ export default function useDebounceInput(input, delay) {
       };
     },
     // Only re-call effect when input changes
-    [input, delay]
+    [input, delay],
   );
 
   return debouncedInput;

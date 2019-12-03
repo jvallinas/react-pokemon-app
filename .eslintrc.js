@@ -7,7 +7,8 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        "airbnb",
+        "airbnb/hooks"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -21,11 +22,10 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
     "rules": {
-        "no-unused-vars": "warn"
-    }
+        "no-unused-vars": "warn",
+        "no-tabs": "off",
+        "react/jsx-one-expression-per-line": [1,  { "allow": "single-child" }],
+        "max-lines": ["warn", 250],
+  }
 };
