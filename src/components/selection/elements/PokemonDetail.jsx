@@ -29,6 +29,8 @@ const PokemonDetail = ({
 }) => {
   const dispatch = useDispatch();
 
+  const pokemonDetail = useSelector((state) => state.pokemonList.filter(pokemon => pokemon.name === pokemonName)[0]);
+
   const urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);
 
@@ -49,15 +51,15 @@ const PokemonDetail = ({
       <div className={styles['pokemon-container']}>
         <img
           className={styles['pokemon-image-container']}
-          src={pokemonData && pokemonData.sprites && pokemonData.sprites.front_default}
+          src={pokemonDetail && pokemonDetail.image}
           alt=""
         />
 
         <h1 className={styles['pokemon-title']}>{pokemonName}</h1>
 
-        {pokemonData && (
+        {pokemonDetail && (
           <>
-            <h1 className={styles['pokemon-id']}>{pokemonData.id}</h1>
+            <h1 className={styles['pokemon-id']}>{pokemonDetail.id}</h1>
             <BaseButton label="Select" onClickHandler={goToPokemonDetail} styleOptions={['uppercase']} />
           </>
         )}
@@ -70,4 +72,4 @@ const PokemonDetail = ({
 PokemonDetail.defaultProps = pokemonDetailDefaultProps;
 PokemonDetail.propTypes = pokemonDetailPropTypes;
 
-export default connect()(React.memo(PokemonDetail));
+export default React.memo(PokemonDetail);

@@ -3,13 +3,11 @@ import ACTION_TYPES from '../actionTypes/actionTypes';
 const { SET_POKEMON_LIST, SET_POKEMON_DETAIL } = ACTION_TYPES;
 
 const defaultState = {
+  // Array of objects with each pokemon data
   pokemonList: [],
 
   // Array with all unique pokemon types
   availableTypes: [],
-
-  // Object that will be filled with pokemon names as keys for easier data access
-  pokemonByName: {},
 };
 
 /** UTILS */
@@ -47,6 +45,8 @@ const parseStats = (statsPayload) => {
   return stats;
 };
 
+const parseImages = (sprites) => ({ image: sprites.front_default });
+
 const removeDuplicates = (list, id) => {
   if (list.length === 0) return list;
   return list.filter((item, index, self) => self.findIndex((i) => i[id] === item[id]) === index);
@@ -78,7 +78,12 @@ const reducer = (state = defaultState, action) => {
     }
 
     case SET_POKEMON_DETAIL: {
-      const { name: payloadName, types, stats } = action.payload;
+      const {
+        name: payloadName,
+        types,
+        stats,
+        sprites,
+      } = action.payload;
 
       let currentPokemonDetails;
 
@@ -88,6 +93,7 @@ const reducer = (state = defaultState, action) => {
             ...pokemon,
             ...parseTypes(types, state),
             ...parseStats(stats),
+            ...parseImages(sprites),
           };
           return currentPokemonDetails;
         }
@@ -96,7 +102,6 @@ const reducer = (state = defaultState, action) => {
 
       const newState = {
         ...state,
-        pokemonByName: { ...state.pokemonByName, [payloadName]: currentPokemonDetails },
         pokemonList: updatedPokemonList,
       };
 

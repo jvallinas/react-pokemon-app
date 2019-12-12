@@ -164,4 +164,4 @@ const Selection = ({
 Selection.defaultProps = selectionDefaultProps;
 Selection.propTypes = selectionPropTypes;
 
-export default connect()(Selection);
+export default Selection;
