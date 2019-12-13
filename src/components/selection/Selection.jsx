@@ -1,7 +1,7 @@
 // Core
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 
 import ACTIONS from '../../containers/App/actions/actions';
@@ -10,6 +10,7 @@ import CONSTANTS from '../../config.values';
 // UI
 import BaseButton from '../_elements/BaseButton';
 import PokemonDetail from './elements/PokemonDetail';
+import PokemonFullDetail from './elements/PokemonFullDetail';
 import SelectionFilter from './SelectionFilter';
 import styles from './Selection.module.css';
 import Modal from '../_elements/Modal';
@@ -122,7 +123,7 @@ const Selection = ({
           <div className={styles['pagination-container']}>
             <BaseButton label="< Previous" onClickHandler={previousPageHandler} styleOptions={['purple', 'transparent']} />
             <span className={styles['page-label']}>
-              {`Page ${currentPage}`}
+              {`Page ${currentPage + 1}`}
             </span>
             <BaseButton label="Next >" onClickHandler={nextPageHandler} styleOptions={['purple', 'transparent']} />
           </div>
@@ -149,11 +150,10 @@ const Selection = ({
       {/* SECTION FOR FULL DETAILS IN DIALOG FRAME */}
       {match && (
         <Modal show onModalClose={goBackToSelection}>
-          <h1 className={styles['pokemon-name']}>{match.params.id.toUpperCase()}</h1>
           {/* TODO replace with full details when ready */}
-          <PokemonDetail
+          <PokemonFullDetail
             key={match.params.id}
-            pokemonName={match.params.id}
+            name={match.params.id}
           />
         </Modal>
       )}

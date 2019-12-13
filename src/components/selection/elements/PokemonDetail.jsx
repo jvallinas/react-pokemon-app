@@ -15,21 +15,21 @@ const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string.isRequired,
   pokemonId: PropTypes.string,
   imagePath: PropTypes.string,
-  pokemonDescription: PropTypes.string,
 };
 
 const pokemonDetailDefaultProps = {
   pokemonId: '',
   imagePath: '',
-  pokemonDescription: '',
 };
 
 const PokemonDetail = ({
-  pokemonName, pokemonId, imagePath
+  pokemonName, pokemonId, imagePath,
 }) => {
   const dispatch = useDispatch();
 
-  const pokemonDetail = useSelector((state) => state.pokemonList.filter(pokemon => pokemon.name === pokemonName)[0]);
+  const pokemonDetail = useSelector(
+    (state) => state.pokemonList.filter((pokemon) => pokemon.name === pokemonName)[0],
+  );
 
   const urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);
@@ -55,7 +55,7 @@ const PokemonDetail = ({
       if (pokemonDescription) {
         dispatch(ACTIONS.setPokemonDescription(pokemonDescription));
       }
-    }, [pokemonDescription],
+    }, [dispatch, pokemonDescription],
   );
 
   return (

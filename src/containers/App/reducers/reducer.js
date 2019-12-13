@@ -27,6 +27,8 @@ const parseTypes = (typesPayload, state) => {
   return types;
 };
 
+const parseAbilities = (abilities) => abilities.map((abilityInfo) => abilityInfo.ability.name);
+
 const parseStats = (statsPayload) => {
   const stats = {};
   statsPayload.forEach((item) => {
@@ -48,10 +50,10 @@ const parseStats = (statsPayload) => {
 const parseImages = (sprites) => ({ image: sprites.front_default });
 
 const parseDescription = (payload) => {
-  const englishDesc = payload.flavor_text_entries.filter(entry => entry.language.name === 'en')[0];
+  const englishDesc = payload.flavor_text_entries.filter((entry) => entry.language.name === 'en')[0];
   return {
     description: englishDesc.flavor_text,
-  }
+  };
 };
 
 const removeDuplicates = (list, id) => {
@@ -89,6 +91,7 @@ const reducer = (state = defaultState, action) => {
         name: payloadName,
         types,
         stats,
+        abilities,
         sprites,
         weight,
         height,
@@ -100,6 +103,7 @@ const reducer = (state = defaultState, action) => {
         if (pokemon.name === payloadName) {
           currentPokemonDetails = {
             ...pokemon,
+            abilities: [...parseAbilities(abilities)],
             ...parseTypes(types, state),
             ...parseStats(stats),
             ...parseImages(sprites),
@@ -120,7 +124,6 @@ const reducer = (state = defaultState, action) => {
     }
 
     case SET_POKEMON_DESCRIPTION: {
-
       let currentPokemonDetails;
 
       const updatedPokemonList = state.pokemonList.map((pokemon) => {
