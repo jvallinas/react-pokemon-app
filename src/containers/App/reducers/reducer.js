@@ -1,6 +1,6 @@
 import ACTION_TYPES from '../actionTypes/actionTypes';
 
-const { SET_POKEMON_LIST, SET_POKEMON_DETAIL } = ACTION_TYPES;
+const { SET_POKEMON_LIST, SET_POKEMON_DETAIL, SET_POKEMON_DESCRIPTION } = ACTION_TYPES;
 
 const defaultState = {
   // Array of objects with each pokemon data
@@ -47,6 +47,13 @@ const parseStats = (statsPayload) => {
 
 const parseImages = (sprites) => ({ image: sprites.front_default });
 
+const parseDescription = (payload) => {
+  const englishDesc = payload.flavor_text_entries.filter(entry => entry.language.name === 'en')[0];
+  return {
+    description: englishDesc.flavor_text,
+  }
+};
+
 const removeDuplicates = (list, id) => {
   if (list.length === 0) return list;
   return list.filter((item, index, self) => self.findIndex((i) => i[id] === item[id]) === index);
@@ -83,6 +90,8 @@ const reducer = (state = defaultState, action) => {
         types,
         stats,
         sprites,
+        weight,
+        height,
       } = action.payload;
 
       let currentPokemonDetails;
@@ -94,6 +103,8 @@ const reducer = (state = defaultState, action) => {
             ...parseTypes(types, state),
             ...parseStats(stats),
             ...parseImages(sprites),
+            weight,
+            height,
           };
           return currentPokemonDetails;
         }
@@ -106,6 +117,27 @@ const reducer = (state = defaultState, action) => {
       };
 
       return newState;
+    }
+
+    case SET_POKEMON_DESCRIPTION: {
+
+      let currentPokemonDetails;
+
+      const updatedPokemonList = state.pokemonList.map((pokemon) => {
+        if (pokemon.name === action.payload.name) {
+          currentPokemonDetails = {
+            ...pokemon,
+            ...parseDescription(action.payload),
+          };
+          return currentPokemonDetails;
+        }
+        return pokemon;
+      });
+
+      return {
+        ...state,
+        pokemonList: updatedPokemonList,
+      };
     }
 
     default:

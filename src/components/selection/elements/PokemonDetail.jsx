@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './PokemonDetail.module.css';
 
@@ -25,7 +25,7 @@ const pokemonDetailDefaultProps = {
 };
 
 const PokemonDetail = ({
-  pokemonName, pokemonId, imagePath, pokemonDescription,
+  pokemonName, pokemonId, imagePath
 }) => {
   const dispatch = useDispatch();
 
@@ -33,6 +33,9 @@ const PokemonDetail = ({
 
   const urlPokemonDetail = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   const { response: pokemonData } = useHttpRequest(urlPokemonDetail);
+
+  const urlPokemonDescription = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`;
+  const { response: pokemonDescription } = useHttpRequest(urlPokemonDescription);
 
   const history = useHistory();
   const goToPokemonDetail = () => history.push(`/selection/${pokemonName}`);
@@ -44,6 +47,15 @@ const PokemonDetail = ({
         dispatch(ACTIONS.setPokemonDetail(pokemonData));
       }
     }, [dispatch, pokemonData],
+  );
+
+  // Adding received data from backend to Redux store
+  useEffect(
+    () => {
+      if (pokemonDescription) {
+        dispatch(ACTIONS.setPokemonDescription(pokemonDescription));
+      }
+    }, [pokemonDescription],
   );
 
   return (
