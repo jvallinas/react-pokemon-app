@@ -14,8 +14,20 @@ const setPokemonDescription = (pokemonDescription) => ({
   payload: pokemonDescription,
 });
 
+const setPokemonTypes = (pokemonTypes) => ({
+  type: ACTION_TYPES.SET_POKEMON_TYPES,
+  payload: pokemonTypes,
+});
+
+const setPokemonForBattle = (pokemonName) => ({
+  type: ACTION_TYPES.SET_POKEMON_FOR_BATTLE,
+  payload: pokemonName,
+});
+
 export default {
   setPokemonList,
   setPokemonDetail,
   setPokemonDescription,
+  setPokemonTypes,
+  setPokemonForBattle,
 };

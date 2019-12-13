@@ -1,6 +1,12 @@
 import ACTION_TYPES from '../actionTypes/actionTypes';
 
-const { SET_POKEMON_LIST, SET_POKEMON_DETAIL, SET_POKEMON_DESCRIPTION } = ACTION_TYPES;
+const {
+  SET_POKEMON_LIST,
+  SET_POKEMON_DETAIL,
+  SET_POKEMON_DESCRIPTION,
+  SET_POKEMON_TYPES,
+  SET_POKEMON_FOR_BATTLE,
+} = ACTION_TYPES;
 
 const defaultState = {
   // Array of objects with each pokemon data
@@ -8,20 +14,17 @@ const defaultState = {
 
   // Array with all unique pokemon types
   availableTypes: [],
+
+  pokemonSlot1: undefined,
+  pokemonSlot2: undefined,
 };
 
 /** UTILS */
 
-const availableTypes = new Set();
-
-const parseTypes = (typesPayload, state) => {
+const parseTypes = (typesPayload) => {
   const types = {};
-  const newState = state;
   typesPayload.map((item) => item.type.name).forEach((type, index) => {
     types[`type${index + 1}`] = type;
-
-    availableTypes.add(type);
-    newState.availableTypes = [...availableTypes];
   });
 
   return types;
@@ -86,6 +89,14 @@ const reducer = (state = defaultState, action) => {
       return newState;
     }
 
+    case SET_POKEMON_TYPES: {
+      const types = action.payload.map((type) => type.name);
+      return {
+        ...state,
+        availableTypes: [...types],
+      };
+    }
+
     case SET_POKEMON_DETAIL: {
       const {
         name: payloadName,
@@ -140,6 +151,13 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         pokemonList: updatedPokemonList,
+      };
+    }
+
+    case SET_POKEMON_FOR_BATTLE: {
+      return {
+        ...state,
+        pokemonSlot1: action.payload,
       };
     }
 

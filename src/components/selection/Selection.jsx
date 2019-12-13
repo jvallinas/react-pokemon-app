@@ -57,6 +57,11 @@ const Selection = ({
     response, error, isLoading, activateRequest,
   } = useHttpRequest(urlSelection);
 
+  const urlTypes = 'https://pokeapi.co/api/v2/type';
+  const {
+    response: typesResponse,
+  } = useHttpRequest(urlTypes);
+
   const [listToDisplay, setListToDisplay] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
   const debouncedCurrentSearch = useDebounceInput(currentSearch, 500);
@@ -68,6 +73,15 @@ const Selection = ({
         dispatch(ACTIONS.setPokemonList(response.results));
       }
     }, [dispatch, response],
+  );
+
+  // Adding received data from backend to Redux store
+  useEffect(
+    () => {
+      if (typesResponse) {
+        dispatch(ACTIONS.setPokemonTypes(typesResponse.results));
+      }
+    }, [dispatch, typesResponse],
   );
 
   // Filtering the data according to the last debounced input
@@ -84,7 +98,12 @@ const Selection = ({
           )],
         );
       }
-    }, [debouncedCurrentSearch, pokemons, offset],
+      if (selectedType && selectedType !== 'none') {
+        setListToDisplay(
+          (l) => [...l.filter((p) => p.type1 === selectedType || p.type2 === selectedType)],
+        );
+      }
+    }, [debouncedCurrentSearch, pokemons, offset, selectedType],
   );
 
   // Triggers another http call on offset change to retrieve data for new page
