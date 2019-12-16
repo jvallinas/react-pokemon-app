@@ -27,7 +27,7 @@
 }
 
 .header-container > button {
-  font-size: 0.5em;
+  font-size: 1.2rem;
   margin-top: auto;
   margin-bottom: 48px;
   min-width: auto;
@@ -38,12 +38,13 @@
   color: black;
   font-family: 'Big Shoulders Text', cursive, sans-serif;
   text-align: initial;
+  font-size: 1.2em;
 }
 
 div.feature-list {
   padding: 16px 0;
   margin: 0 10%;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .steps {
@@ -51,10 +52,12 @@ div.feature-list {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  font-size: 1.2em;
 }
 
 .steps + button {
   margin-bottom: 48px;
+  font-size: 1.2em;
 }
 
 @media only screen and (max-width: 768px) {
@@ -63,4 +66,8 @@ div.feature-list {
     flex-wrap: wrap;
     justify-content: space-around;
   }
+}
+
+img.description-decoration {
+  float: right;
 }
