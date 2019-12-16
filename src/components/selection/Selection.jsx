@@ -8,12 +8,12 @@ import ACTIONS from '../../containers/App/actions/actions';
 import CONSTANTS from '../../config.values';
 
 // UI
-import BaseButton from '../_elements/BaseButton';
+import BaseButton from '../_common/BaseButton';
 import PokemonDetail from './elements/PokemonDetail';
 import PokemonFullDetail from './elements/PokemonFullDetail';
 import SelectionFilter from './SelectionFilter';
 import styles from './Selection.module.css';
-import Modal from '../_elements/Modal';
+import Modal from '../_common/Modal';
 
 // Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';

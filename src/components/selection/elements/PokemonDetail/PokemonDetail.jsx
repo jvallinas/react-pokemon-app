@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './PokemonDetail.module.css';
 
-import useHttpRequest from '../../../hooks/useHttpRequest';
-import BaseButton from '../../_elements/BaseButton';
+import useHttpRequest from '../../../../hooks/useHttpRequest';
+import BaseButton from '../../../_common/BaseButton/BaseButton';
 
-import ACTIONS from '../../../containers/App/actions/actions';
+import ACTIONS from '../../../../containers/App/actions/actions';
 
 const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string.isRequired,

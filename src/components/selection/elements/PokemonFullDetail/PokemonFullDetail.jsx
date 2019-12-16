@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ACTIONS from '../../../containers/App/actions/actions';
+import ACTIONS from '../../../../containers/App/actions/actions';
 
 import styles from './PokemonFullDetail.module.css';
 
-import BaseButton from '../../_elements/BaseButton';
+import BaseButton from '../../../_common/BaseButton/BaseButton';
 
 const pokemonFullDetailPropTypes = {
   name: PropTypes.string.isRequired,
