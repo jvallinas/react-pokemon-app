@@ -1,4 +1,5 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import Overview from './Overview';
 import OverviewStep from './elements/OverviewStep';
@@ -24,5 +25,13 @@ describe('Layout rendering in Overview page', () => {
   it('Renders correct number of Step items', () => {
     const wrapper = shallow(<Overview title={mockTitle} subtitle={mockSubtitle} />);
     expect(wrapper.find(OverviewStep).length).toEqual(3);
+  });
+
+  it('Renders as expected', () => {
+    const tree = renderer
+      .create(<Overview title={mockTitle} subtitle={mockSubtitle} />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });

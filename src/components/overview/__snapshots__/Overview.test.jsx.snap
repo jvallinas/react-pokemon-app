@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout rendering in Overview page Renders as expected 1`] = `
+Array [
+  <div
+    className="header-container"
+  >
+    <h1
+      className="header-title"
+    >
+      WELCOME TO REACT POKEMON APP
+    </h1>
+    <div
+      className="header-subtitle"
+    >
+      AN APP FOR LEARNING REACT
+    </div>
+    <button
+      className="uppercase purple"
+      onClick={[Function]}
+      type="button"
+    >
+      Let's do it!
+    </button>
+  </div>,
+  <div
+    className="feature-list"
+  >
+    <section>
+      <img
+        alt=""
+        className="description-decoration"
+        height="400"
+        src="../images/pachirisu.png"
+        width="auto"
+      />
+      <h1
+        className="section-title"
+      >
+        OBJECTIVE
+      </h1>
+      <div
+        className="description"
+      >
+        The goal is to create a Pokemon application using the React framework and the Pokemon API. React Hooks and functional components will be used for this app.
+      </div>
+    </section>
+    <section>
+      <h1
+        className="section-title"
+      >
+        CHALLENGE
+      </h1>
+      <div
+        className="description"
+      >
+        We will be creating a model to instantiate new pokemons and supply our application with data, having several fields such as their name, type, weakness and other stats. This information will be stored via Redux store, dispatching different actions based on the type of info to store.
+      </div>
+    </section>
+    <section>
+      <h1
+        className="section-title"
+      >
+        HOW IT WORKS
+      </h1>
+      <video
+        controls={true}
+        height="auto"
+        min-width="300px"
+        width="80%"
+      >
+        <source
+          src="../sample_video.mp4"
+          type="video/mp4"
+        />
+        <track
+          kind="captions"
+        />
+        (Your browser does not support the video tag).
+      </video>
+    </section>
+  </div>,
+  <div
+    className="steps"
+  >
+    <div
+      className="step-container"
+    >
+      <img
+        alt=""
+        className="step-image-container"
+        src="images/pokeball.png"
+      />
+      <h1
+        className="step-title"
+      >
+        STEP 1
+      </h1>
+      <div
+        className="step-description"
+      >
+        Go to the Selection screen, where you will be able to select from a list of many different Pokemons
+    and choose them for battle. It is also possible to filter pokemons by their name, or by their type.
+      </div>
+    </div>
+    <div
+      className="step-container"
+    >
+      <img
+        alt=""
+        className="step-image-container"
+        src="images/pokedex.png"
+      />
+      <h1
+        className="step-title"
+      >
+        STEP 2
+      </h1>
+      <div
+        className="step-description"
+      >
+        By selecting a Pokemon, their full stats will be displayed so that you can confirm if you want it to take part in a battle.
+    If you change your mind, you can always cancel by closing the dialog and select another Pokemon from the Selection screen.
+      </div>
+    </div>
+    <div
+      className="step-container"
+    >
+      <img
+        alt=""
+        className="step-image-container"
+        src="images/battle.png"
+      />
+      <h1
+        className="step-title"
+      >
+        STEP 3
+      </h1>
+      <div
+        className="step-description"
+      >
+        When two Pokemons are selected, gather them together and go to the Fight screen in order for the battle to start!
+      </div>
+    </div>
+  </div>,
+  <button
+    className="uppercase purple"
+    onClick={[Function]}
+    type="button"
+  >
+    Let's do it!
+  </button>,
+]
+`;
