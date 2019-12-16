@@ -12,7 +12,8 @@
 .info-container {
   margin: 24px 8px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex: 0 1 40%;
 }
 
 .pokemon-description {
@@ -27,9 +28,7 @@
 }
 
 .stats-section {
-  margin: 0 16px;
   padding: 8px;
-  width: 50%;
   border: 1px solid gray;
   display: flex;
   flex-wrap: wrap;
@@ -59,9 +58,19 @@
   width: fit-content;
 }
 
+.details-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
 @media only screen and (max-width: 768px) {
   .pokemon-container {
-    flex: 0 1 20%;
+    flex: 0 1 50%;
+  }
+
+  .details-container {
+    flex-direction: column;
   }
 
   .info-container {
@@ -70,7 +79,6 @@
 
   .stats-section {
     padding: 16px;
-    width: inherit;
   }
 
   .stat-container {
@@ -95,14 +103,30 @@
   content:'#';
 }
 
-div.placeholder-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.placeholder {
-  display: inline-block;
-  font-size: 3em;
-  color: lightgray;
+.extra-info {
+  height: auto;
+  border: 1px solid gray;
 }
 
+.extra-info-section {
+  text-align: start;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.extra-info-section > *:first-child {
+  margin-left: 10px;
+}
+
+.extra-info-section > * {
+  margin-right: 10px;
+}
+
+.info-container > * {
+  border-bottom: 0;
+}
+
+.info-container > *:last-of-type {
+  border-bottom: 1px solid gray;
+}

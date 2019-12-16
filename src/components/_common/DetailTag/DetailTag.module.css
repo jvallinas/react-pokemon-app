@@ -1,0 +1,50 @@
+.tag {
+  display: inline-block;
+  text-transform: capitalize;
+  text-align: initial;
+  padding: 0.5em 1em;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: black;
+  background-color: lightgray;
+}
+
+/* TYPES */
+
+.normal {
+  background-color: orange ;
+}
+.fighting {
+  background-color: lightcoral ;
+}
+.grass {
+  background-color: green ;
+}
+.poison {
+  background-color: darkorchid ;
+}
+.water {
+  background-color: lightskyblue ;
+}
+.bug {
+  background-color: greenyellow ;
+}
+.flying {
+  background-color: lime ;
+}
+.ground {
+  background-color: brown ;
+}
+.rock {
+  background-color: darkslategrey ;
+}
+
+/* Font colors for types */
+
+.poison, .grass, .ground, .rock {
+  color: white;
+}
+
+.normal, .fighting, .water, .bug {
+  color: black;
+}

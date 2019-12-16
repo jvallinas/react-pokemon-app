@@ -1,0 +1,41 @@
+.stat-label {
+  text-transform: uppercase;
+}
+
+.stats-section {
+  margin: 0 16px;
+  padding: 8px;
+  width: 50%;
+  border: 1px solid gray;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: safe;
+}
+
+.stat-container {
+  padding-top: 8px;
+  padding-bottom: 32px;
+  flex: 0 1 50%;
+}
+.stat-label {
+  color: dimgray;
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 1.2em;
+  color: black;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .stats-section {
+    padding: 16px;
+    width: inherit;
+  }
+
+  .stat-container {
+    padding: 16px 0;
+  }
+}

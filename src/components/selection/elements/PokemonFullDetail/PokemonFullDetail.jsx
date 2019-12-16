@@ -7,6 +7,8 @@ import ACTIONS from '../../../../containers/App/actions/actions';
 import styles from './PokemonFullDetail.module.css';
 
 import BaseButton from '../../../_common/BaseButton/BaseButton';
+import StatDisplay from '../../../_common/StatDisplay/StatDisplay';
+import DetailTag from '../../../_common/DetailTag/DetailTag';
 
 const pokemonFullDetailPropTypes = {
   name: PropTypes.string.isRequired,
@@ -36,47 +38,24 @@ const PokemonFullDetail = ({
 
         <div className={styles['pokemon-description']}>{pokemonDetail.description}</div>
 
-        <div className={styles['info-container']}>
+        <div className={styles['details-container']}>
 
-          <div className={styles['stats-section']}>
+          <div className={styles['info-container']}>
+            <div className={styles['stats-section']}>
+              <StatDisplay statLabel="Height" statValue={pokemonDetail.height} />
+              <StatDisplay statLabel="Weight" statValue={pokemonDetail.weight} />
+              <StatDisplay statLabel="Category" statValue={[pokemonDetail.type1, pokemonDetail.type2]} />
+              <StatDisplay statLabel="Abilities" statValue={pokemonDetail.abilities} />
+            </div>
 
-            <div className={styles['stat-container']}>
-              <div className={styles['stat-label']}>
-                Height
-              </div>
-              <div className={styles['stat-value']}>
-                {pokemonDetail.height}
+            <div className={styles['extra-info']}>
+              <div className={styles['extra-info-section']}>TYPE</div>
+              <div className={styles['extra-info-section']}>
+                <DetailTag tagName={pokemonDetail.type1} />
+                {pokemonDetail.type2 && <DetailTag tagName={pokemonDetail.type2} />}
               </div>
             </div>
 
-            <div className={styles['stat-container']}>
-              <div className={styles['stat-label']}>
-                Weight
-              </div>
-              <div className={styles['stat-value']}>
-                {pokemonDetail.weight}
-              </div>
-            </div>
-
-            <div className={styles['stat-container']}>
-              <div className={styles['stat-label']}>
-                Category
-              </div>
-              <div className={styles['stat-value']}>
-                {pokemonDetail.type1}
-              </div>
-            </div>
-
-            <div className={styles['stat-container']}>
-              <div className={styles['stat-label']}>
-                Abilities
-              </div>
-              <div className={styles['stat-value']}>
-                {pokemonDetail.abilities && pokemonDetail.abilities.map(
-                  (ab) => <div key={ab}>{ab}</div>,
-                )}
-              </div>
-            </div>
           </div>
 
           <div className={styles['pokemon-container']}>
