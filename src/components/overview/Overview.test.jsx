@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Overview from './Overview';
 import OverviewStep from './elements/OverviewStep';
 import BaseButton from '../_common/BaseButton/BaseButton';
@@ -33,15 +33,5 @@ describe('Layout rendering in Overview page', () => {
       .toJSON();
 
     expect(tree).toMatchSnapshot();
-  });
-});
-
-describe('Test Button component', () => {
-  it('Test click event', () => {
-    const mockCallBack = jest.fn();
-    const buttonComponent = mount(<BaseButton label="Label" onClickHandler={mockCallBack} />);
-    const button = buttonComponent.find('button').first();
-    button.find('button').simulate('click');
-    expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });
