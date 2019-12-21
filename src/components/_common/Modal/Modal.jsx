@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
 
@@ -12,17 +12,25 @@ const modalPropTypes = {
 const Modal = ({ onModalClose, show, children }) => {
   const modalStatusClass = show ? 'modal-visible' : 'modal-hidden';
 
+  const exitButtonElement = useRef(null);
+
+  // Places focus on exit button when modal component is rendered
+  useEffect(() => {
+    exitButtonElement.current.focus();
+  }, []);
+
   return (
     <div className={styles[modalStatusClass]}>
       <section className={styles['modal-frame']}>
-        {children}
         <button
           type="button"
           className={styles.close}
           onClick={onModalClose}
+          ref={exitButtonElement}
         >
           Close
         </button>
+        {children}
       </section>
     </div>
   );
