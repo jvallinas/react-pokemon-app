@@ -48,9 +48,7 @@ const Selection = ({
   const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState('');
 
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
+  useEffect(() => { document.title = title; }, [title]);
 
   const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
   const {
@@ -58,9 +56,7 @@ const Selection = ({
   } = useHttpRequest(urlSelection);
 
   const urlTypes = 'https://pokeapi.co/api/v2/type';
-  const {
-    response: typesResponse,
-  } = useHttpRequest(urlTypes);
+  const { response: typesResponse } = useHttpRequest(urlTypes);
 
   const [listToDisplay, setListToDisplay] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
@@ -69,19 +65,9 @@ const Selection = ({
   // Adding received data from backend to Redux store
   useEffect(
     () => {
-      if (response) {
-        dispatch(ACTIONS.setPokemonList(response.results));
-      }
-    }, [dispatch, response],
-  );
-
-  // Adding received data from backend to Redux store
-  useEffect(
-    () => {
-      if (typesResponse) {
-        dispatch(ACTIONS.setPokemonTypes(typesResponse.results));
-      }
-    }, [dispatch, typesResponse],
+      if (response) dispatch(ACTIONS.setPokemonList(response.results));
+      if (typesResponse) dispatch(ACTIONS.setPokemonTypes(typesResponse.results));
+    }, [dispatch, response, typesResponse],
   );
 
   // Filtering the data according to the last debounced input
@@ -107,24 +93,12 @@ const Selection = ({
   );
 
   // Triggers another http call on offset change to retrieve data for new page
-  useEffect(
-    () => {
-      activateRequest();
-    }, [offset, activateRequest],
-  );
+  useEffect(() => activateRequest(), [offset, activateRequest]);
 
   /* EVENT HANDLERS */
-  const updateSearchTermHandler = useCallback((e) => {
-    setCurrentSearch(e.target.value);
-  }, []);
-
-  const updateSelectedTypeHandler = useCallback((e) => {
-    setSelectedType(e.target.value);
-  }, []);
-
-  const goBackToSelection = useCallback(() => {
-    history.goBack();
-  }, [history]);
+  const updateSearchTermHandler = useCallback((e) => setCurrentSearch(e.target.value), []);
+  const updateSelectedTypeHandler = useCallback((e) => setSelectedType(e.target.value), []);
+  const goBackToSelection = useCallback(() => history.goBack(), [history]);
 
   return (
     <>
@@ -156,14 +130,12 @@ const Selection = ({
       )}
 
       <div className={styles['pokemons-container']}>
-        {
-        listToDisplay.map((pokemon) => (
+        {listToDisplay.map((pokemon) => (
           <PokemonDetail
             key={pokemon.name}
             pokemonName={pokemon.name}
           />
-        ))
-			}
+        ))}
       </div>
 
       {/* SECTION FOR FULL DETAILS IN DIALOG FRAME */}
