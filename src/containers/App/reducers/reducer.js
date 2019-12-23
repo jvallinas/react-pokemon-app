@@ -16,6 +16,7 @@ const defaultState = {
 
   // Array with all unique pokemon types
   availableTypes: [],
+  weaknessesForType: [],
 };
 
 /** UTILS */
@@ -90,9 +91,16 @@ const reducer = (state = defaultState, action) => {
 
     case SET_POKEMON_TYPES: {
       const types = action.payload.map((type) => type.name);
+      const weaknessInfo = action.payload.map((type) => (
+        {
+          name: type.name,
+          weakTo: type.damage_relations.double_damage_from.map((weakness) => weakness.name),
+        }
+      ));
       return {
         ...state,
         availableTypes: [...types],
+        weaknessesForType: [...weaknessInfo],
       };
     }
 

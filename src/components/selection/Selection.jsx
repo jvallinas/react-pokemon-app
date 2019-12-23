@@ -17,6 +17,7 @@ import Modal from '../_common/Modal/Modal';
 
 // Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';
+import useGetAllTypesData from './hooks/useGetAllTypesData';
 import useDebounceInput from '../../hooks/useDebounceInput';
 import BattleGround from './elements/BattleGround/BattleGround';
 
@@ -57,7 +58,7 @@ const Selection = ({
   } = useHttpRequest(urlSelection);
 
   const urlTypes = 'https://pokeapi.co/api/v2/type';
-  const { response: typesResponse } = useHttpRequest(urlTypes);
+  const { fetchedData: allTypesInfo } = useGetAllTypesData(urlTypes);
 
   const [listToDisplay, setListToDisplay] = useState([]);
   const [currentSearch, setCurrentSearch] = useState('');
@@ -67,8 +68,8 @@ const Selection = ({
   useEffect(
     () => {
       if (response) dispatch(ACTIONS.setPokemonList(response.results));
-      if (typesResponse) dispatch(ACTIONS.setPokemonTypes(typesResponse.results));
-    }, [dispatch, response, typesResponse],
+      if (allTypesInfo) dispatch(ACTIONS.setPokemonTypes(allTypesInfo));
+    }, [dispatch, response, allTypesInfo],
   );
 
   // Filtering the data according to the last debounced input
@@ -103,7 +104,6 @@ const Selection = ({
 
   return (
     <>
-
       <div className={styles['header-container']}>
         <h1 className={styles.title}>{title.toUpperCase()}</h1>
         <BattleGround />

@@ -20,7 +20,7 @@ const StatDisplay = ({
         {statLabel}
       </div>
       <div className={styles['stat-value']}>
-        {typeof statValue === 'object'
+        {typeof statValue === 'object' && statValue.value
           ? statValue.map(
             (value) => <div key={value}>{value}</div>,
           )

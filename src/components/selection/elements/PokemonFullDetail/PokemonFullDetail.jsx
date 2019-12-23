@@ -28,6 +28,17 @@ const PokemonFullDetail = ({
     (state) => state.pokemonList.filter((pokemon) => pokemon.name === name)[0],
   );
 
+  const pokemonWeaknesses = useSelector(
+    (state) => {
+      const filterPokemonTypes = (type) => (
+        type.name === pokemonDetail.type1 || type.name === pokemonDetail.type2
+      );
+      const typesForPokemon = state.weaknessesForType.filter(filterPokemonTypes);
+      const weaknessesForPokemon = [].concat(...typesForPokemon.map((type) => [...type.weakTo]));
+      return [...new Set(weaknessesForPokemon)];
+    },
+  );
+
   return (
     <>
       {pokemonDetail
@@ -53,6 +64,13 @@ const PokemonFullDetail = ({
               <div className={styles['extra-info-section']}>
                 <DetailTag tagName={pokemonDetail.type1} />
                 {pokemonDetail.type2 && <DetailTag tagName={pokemonDetail.type2} />}
+              </div>
+            </div>
+
+            <div className={styles['extra-info']}>
+              <div className={styles['extra-info-section']}>WEAKNESSES</div>
+              <div className={styles['extra-info-section']}>
+                {pokemonWeaknesses.map((weak) => <DetailTag key={weak} tagName={weak} />)}
               </div>
             </div>
 

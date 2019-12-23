@@ -38,13 +38,20 @@
 .rock {
   background-color: darkslategrey ;
 }
-
-/* Font colors for types */
-
-.poison, .grass, .ground, .rock {
-  color: white;
+.fire {
+  background-color: orangered ;
+}
+.electric {
+  background-color: blue ;
+}
+.ice {
+  background-color: skyblue ;
 }
 
-.normal, .fighting, .water, .bug {
+/* Font colors for types */
+.poison, .grass, .ground, .rock, .electric, .fire {
+  color: white;
+}
+.normal, .fighting, .water, .bug, .ice {
   color: black;
 }
