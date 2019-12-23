@@ -18,6 +18,7 @@ import Modal from '../_common/Modal/Modal';
 // Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useDebounceInput from '../../hooks/useDebounceInput';
+import BattleGround from './elements/BattleGround/BattleGround';
 
 const selectionPropTypes = {
   currentPage: PropTypes.number,
@@ -102,7 +103,11 @@ const Selection = ({
 
   return (
     <>
-      <h1 className={styles.title}>{title.toUpperCase()}</h1>
+
+      <div className={styles['header-container']}>
+        <h1 className={styles.title}>{title.toUpperCase()}</h1>
+        <BattleGround />
+      </div>
       {/* FILTER & PAGINATION SECTION */}
       {response && (
         <>

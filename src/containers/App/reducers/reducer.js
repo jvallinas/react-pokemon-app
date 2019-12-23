@@ -6,17 +6,16 @@ const {
   SET_POKEMON_DESCRIPTION,
   SET_POKEMON_TYPES,
   SET_POKEMON_FOR_BATTLE,
+  REMOVE_POKEMON_FROM_BATTLE,
 } = ACTION_TYPES;
 
 const defaultState = {
   // Array of objects with each pokemon data
   pokemonList: [],
+  pokemonBattleground: [],
 
   // Array with all unique pokemon types
   availableTypes: [],
-
-  pokemonSlot1: undefined,
-  pokemonSlot2: undefined,
 };
 
 /** UTILS */
@@ -155,9 +154,35 @@ const reducer = (state = defaultState, action) => {
     }
 
     case SET_POKEMON_FOR_BATTLE: {
+      const newPokemon = state.pokemonList.filter((p) => p.name === action.payload)[0];
+      const pokemonsInBattleground = state.pokemonBattleground.length;
+      switch (pokemonsInBattleground) {
+        case 0:
+          return {
+            ...state,
+            pokemonBattleground: [newPokemon],
+          };
+        case 1:
+          return {
+            ...state,
+            pokemonBattleground: [...state.pokemonBattleground, newPokemon],
+          };
+        default:
+          // TODO refine behavior when both battle slots are already taken
+          // Right now first slot will be overwritten with new pokemon,
+          // and second slot will be empty
+          return {
+            ...state,
+            pokemonBattleground: [newPokemon],
+          };
+      }
+    }
+
+    case REMOVE_POKEMON_FROM_BATTLE: {
+      const newBattleground = state.pokemonBattleground.filter((p) => p.name === !action.payload);
       return {
         ...state,
-        pokemonSlot1: action.payload,
+        pokemonBattleground: [...newBattleground],
       };
     }
 

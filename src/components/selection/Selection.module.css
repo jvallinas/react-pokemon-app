@@ -12,6 +12,13 @@
   margin-left: 24px;
 }
 
+.header-container{
+  margin: 8px;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
 .pokemon-container {
   margin: 8px 16px;
   padding: 8px;
@@ -23,6 +30,12 @@
 @media only screen and (max-width: 768px) {
   .pokemon-container {
     flex: 1 1 auto;
+  }
+  .header-container{
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    justify-content: space-between;
   }
 }
 
