@@ -1,0 +1,25 @@
+.pokemon-container {
+  display: inline-block;
+  margin: 8px 16px;
+  padding: 8px;
+  flex: 0 1 20%;
+  height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .pokemon-container {
+    flex: 1 1 auto;
+  }
+}
+
+.pokemon-image-container {
+  margin: 16px 24px;
+  border-radius: 50%;
+  background-color: rgb(201, 229, 233);
+}
+
+.pokemon-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
