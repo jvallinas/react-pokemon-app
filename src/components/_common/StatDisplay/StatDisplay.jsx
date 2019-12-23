@@ -4,7 +4,11 @@ import styles from './StatDisplay.module.css';
 
 const statDisplayPropTypes = {
   statLabel: PropTypes.string.isRequired,
-  statValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  statValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+};
+
+const statDisplayDefaultProps = {
+  statValue: '?',
 };
 
 const StatDisplay = ({
@@ -27,5 +31,6 @@ const StatDisplay = ({
 );
 
 StatDisplay.propTypes = statDisplayPropTypes;
+StatDisplay.defaultProps = statDisplayDefaultProps;
 
 export default React.memo(StatDisplay);
