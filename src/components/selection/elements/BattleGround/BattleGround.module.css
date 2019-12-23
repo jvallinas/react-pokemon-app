@@ -4,17 +4,19 @@
   width: fit-content;
   border: 1px solid lightgray;
   margin: 0 auto;
-}
-
-.pokemons-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   background-color: whitesmoke;
 }
 
-.pokemons-container > button {
+.battleground-container > button {
   margin-right: 24px;
+}
+
+.pokemon-container {
+    position: relative;
+    padding: 0;
 }
 
 @media only screen and (max-width: 768px) {
@@ -37,4 +39,15 @@
 .fight-button {
   max-height: 3em;
   height: 100px;
+}
+
+.button-badge {
+  background: black;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px 8px;
+  border-radius: 15px;
 }

@@ -28,18 +28,26 @@ const BattleGround = () => {
   return (
     <>
       <div className={styles['battleground-container']}>
-        <div className={styles['pokemons-container']}>
+
+        <div className={styles['pokemon-container']}>
           <PokemonAvatar
-            pokemonName={firstPokemon && firstPokemon.name}
             imagePath={firstPokemon && firstPokemon.image}
           />
+          {firstPokemon
+            && <button type="button" className={styles['button-badge']}>X</button>}
+        </div>
 
           <div className={styles['vs-label']}>VS</div>
 
+        <div className={styles['pokemon-container']}>
           <PokemonAvatar
             pokemonName={secondPokemon && secondPokemon.name}
             imagePath={secondPokemon && secondPokemon.image}
           />
+          {secondPokemon
+            && <button type="button" className={styles['button-badge']}>X</button>}
+        </div>
+
           {firstPokemon && secondPokemon
             && (
               <BaseButton
@@ -48,7 +56,6 @@ const BattleGround = () => {
               />
             )}
         </div>
-      </div>
     </>
   );
 };
