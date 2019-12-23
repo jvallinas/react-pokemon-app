@@ -1,9 +1,8 @@
 .battleground-container {
   position: initial;
-  margin-left: auto;
   margin-right: 48px;
   width: fit-content;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   margin: 0 auto;
 }
 
@@ -24,6 +23,10 @@
   }
   .pokemons-container > button {
     padding: 1em 2em;
+  }
+
+  .battleground-container {
+    width: 100%;
   }
 }
 .pokemon-title, .pokemon-id {

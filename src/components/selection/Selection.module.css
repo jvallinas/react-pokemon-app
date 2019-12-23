@@ -37,6 +37,7 @@
     flex-flow: wrap;
     justify-content: space-between;
   }
+
 }
 
 .filter-container, .pokemons-container, .pagination-container, .placeholder {

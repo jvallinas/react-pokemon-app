@@ -4,7 +4,7 @@
   box-sizing: border-box;
   color: black;
   text-align: initial;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   padding: 24px;
 }
 
@@ -16,4 +16,11 @@
 .type {
   padding: 8px;
   margin: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .filter-container {
+    margin: 8px;
+    width: inherit;
+  }
 }

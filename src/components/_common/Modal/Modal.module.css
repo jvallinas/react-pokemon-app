@@ -15,19 +15,13 @@
 .modal-frame {
   position:fixed;
   background: white;
-  width: 80%;
+  width: 70%;
   height: auto;
   min-height: 50%;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
-}
-
-@media only screen and (max-width: 768px) {
-  .modal-frame {
-    width: 100%;
-    height: 100%;
-  }
+  padding: 24px;
 }
 
 button.close {
@@ -48,3 +42,15 @@ button.close::after {
   padding-left: 8px;
   content: 'X';
 }
+
+@media only screen and (max-width: 768px) {
+  .modal-frame {
+    width: 100%;
+    height: 100%;
+  }
+
+  button.close {
+    padding: 2em;
+  }
+}
+

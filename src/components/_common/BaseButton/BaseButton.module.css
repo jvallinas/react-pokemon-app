@@ -5,6 +5,7 @@ button {
   color: white;
   border-radius: 8px;
   padding: 1em 3em;
+  font-size: 1em;
 }
 
 button:hover, button:focus {
