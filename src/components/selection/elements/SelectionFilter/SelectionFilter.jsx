@@ -8,18 +8,15 @@ const selectionFilterPropTypes = {
   currentSearch: PropTypes.string.isRequired,
   updateSearchTermHandler: PropTypes.func.isRequired,
   availableTypes: PropTypes.arrayOf(PropTypes.string),
-  selectedType: PropTypes.string,
-  updateSelectedTypeHandler: PropTypes.func,
+  updateSelectedTypeHandler: PropTypes.func.isRequired,
 };
 
 const selectionFilterDefaultProps = {
   availableTypes: [],
-  selectedType: '',
-  updateSelectedTypeHandler: (e) => { console.log('Selected type: ', e.target.value); },
 };
 
 const SelectionFilter = ({
-  currentSearch, updateSearchTermHandler, availableTypes, selectedType, updateSelectedTypeHandler,
+  currentSearch, updateSearchTermHandler, availableTypes, updateSelectedTypeHandler,
 }) => (
   <div className={styles['filter-container']}>
     <div className={styles.search}>SEARCH</div>

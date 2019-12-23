@@ -13,17 +13,10 @@ import ACTIONS from '../../../../containers/App/actions/actions';
 
 const pokemonDetailPropTypes = {
   pokemonName: PropTypes.string.isRequired,
-  pokemonId: PropTypes.string,
-  imagePath: PropTypes.string,
-};
-
-const pokemonDetailDefaultProps = {
-  pokemonId: '',
-  imagePath: '',
 };
 
 const PokemonDetail = ({
-  pokemonName, pokemonId, imagePath,
+  pokemonName,
 }) => {
   const dispatch = useDispatch();
 
@@ -81,7 +74,6 @@ const PokemonDetail = ({
   );
 };
 
-PokemonDetail.defaultProps = pokemonDetailDefaultProps;
 PokemonDetail.propTypes = pokemonDetailPropTypes;
 
 export default React.memo(PokemonDetail);
