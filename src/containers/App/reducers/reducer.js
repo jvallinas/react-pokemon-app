@@ -1,4 +1,13 @@
 import ACTION_TYPES from '../actionTypes/actionTypes';
+import {
+  parseAbilities,
+  parseDescription,
+  parseImages,
+  parseStats,
+  parseTypes,
+  removeDuplicates,
+  retrieveIdFromUrl,
+} from './utils/utils';
 
 const {
   SET_POKEMON_LIST,
@@ -17,56 +26,6 @@ const defaultState = {
   // Array with all unique pokemon types
   availableTypes: [],
   weaknessesForType: [],
-};
-
-/** UTILS */
-
-const parseTypes = (typesPayload) => {
-  const types = {};
-  typesPayload.map((item) => item.type.name).forEach((type, index) => {
-    types[`type${index + 1}`] = type;
-  });
-
-  return types;
-};
-
-const parseAbilities = (abilities) => abilities.map((abilityInfo) => abilityInfo.ability.name);
-
-const parseStats = (statsPayload) => {
-  const stats = {};
-  statsPayload.forEach((item) => {
-    switch (item.stat.name) {
-      case 'attack':
-      case 'defense':
-      case 'speed':
-      case 'special-attack':
-      case 'special-defense':
-        stats[item.stat.name] = item.base_stat;
-        break;
-      default:
-        break;
-    }
-  });
-  return stats;
-};
-
-const parseImages = (sprites) => ({ image: sprites.front_default });
-
-const parseDescription = (payload) => {
-  const englishDesc = payload.flavor_text_entries.filter((entry) => entry.language.name === 'en')[0];
-  return {
-    description: englishDesc.flavor_text,
-  };
-};
-
-const removeDuplicates = (list, id) => {
-  if (list.length === 0) return list;
-  return list.filter((item, index, self) => self.findIndex((i) => i[id] === item[id]) === index);
-};
-
-const retrieveIdFromUrl = (url) => {
-  const parsedId = parseInt(url.replace('https://pokeapi.co/api/v2/pokemon/', ''), 10);
-  return parsedId;
 };
 
 /** REDUCER FUNCTION */
