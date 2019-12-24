@@ -146,7 +146,7 @@ const reducer = (state = defaultState, action) => {
     }
 
     case REMOVE_POKEMON_FROM_BATTLE: {
-      const newBattleground = state.pokemonBattleground.filter((p) => p.name === !action.payload);
+      const newBattleground = state.pokemonBattleground.filter((p) => p.name !== action.payload);
       return {
         ...state,
         pokemonBattleground: [...newBattleground],

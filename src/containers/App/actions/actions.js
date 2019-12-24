@@ -24,10 +24,16 @@ const setPokemonForBattle = (pokemonName) => ({
   payload: pokemonName,
 });
 
+const removePokemonFromBattle = (pokemonName) => ({
+  type: ACTION_TYPES.REMOVE_POKEMON_FROM_BATTLE,
+  payload: pokemonName,
+});
+
 export default {
   setPokemonList,
   setPokemonDetail,
   setPokemonDescription,
   setPokemonTypes,
   setPokemonForBattle,
+  removePokemonFromBattle,
 };

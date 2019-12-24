@@ -19,6 +19,17 @@
     padding: 0;
 }
 
+.button-badge {
+  background: black;
+  color: white;
+  font-size: 1em;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  padding: 2px 8px;
+  border-radius: 15px;
+}
+
 @media only screen and (max-width: 768px) {
   .pokemon-container {
     flex: 1 1 auto;
@@ -29,6 +40,10 @@
 
   .battleground-container {
     width: 100%;
+  }
+  
+  .button-badge {
+    right: 35%;
   }
 }
 .pokemon-title, .pokemon-id {
@@ -41,13 +56,3 @@
   height: 100px;
 }
 
-.button-badge {
-  background: black;
-  color: white;
-  font-size: 12px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 5px 8px;
-  border-radius: 15px;
-}
