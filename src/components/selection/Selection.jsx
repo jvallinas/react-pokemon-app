@@ -42,7 +42,7 @@ const Selection = ({
   limit, offset, title, currentPage,
   previousPageHandler, nextPageHandler,
 }) => {
-  const match = useRouteMatch('/selection/:id');
+  const fullDetailsRoute = useRouteMatch('/selection/:id');
   const history = useHistory();
 
   const pokemons = useSelector((state) => state.pokemonList);
@@ -101,6 +101,10 @@ const Selection = ({
   const updateSearchTermHandler = useCallback((e) => setCurrentSearch(e.target.value), []);
   const updateSelectedTypeHandler = useCallback((e) => setSelectedType(e.target.value), []);
   const goBackToSelection = useCallback(() => history.goBack(), [history]);
+  const selectPokemonHandler = useCallback(() => {
+    dispatch(ACTIONS.setPokemonForBattle(fullDetailsRoute.params.id));
+  }, [fullDetailsRoute, dispatch]);
+
 
   return (
     <>
@@ -144,13 +148,15 @@ const Selection = ({
       </div>
 
       {/* SECTION FOR FULL DETAILS IN DIALOG FRAME */}
-      {match && (
+      {fullDetailsRoute && (
         <Modal show onModalClose={goBackToSelection}>
           {/* TODO replace with full details when ready */}
           <PokemonFullDetail
-            key={match.params.id}
-            name={match.params.id}
-          />
+            key={fullDetailsRoute.params.id}
+            name={fullDetailsRoute.params.id}
+          >
+            <BaseButton label="Select for battle" styleOptions={['uppercase']} onClickHandler={selectPokemonHandler} />
+          </PokemonFullDetail>
         </Modal>
       )}
     </>

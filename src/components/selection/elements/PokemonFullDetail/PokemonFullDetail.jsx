@@ -1,29 +1,24 @@
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import ACTIONS from '../../../../containers/App/actions/actions';
 
 import styles from './PokemonFullDetail.module.css';
 
-import BaseButton from '../../../_common/BaseButton/BaseButton';
 import StatDisplay from '../../../_common/StatDisplay/StatDisplay';
 import DetailTag from '../../../_common/DetailTag/DetailTag';
 
 const pokemonFullDetailPropTypes = {
   name: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+};
+
+const pokemonFullDetailDefaultProps = {
+  children: <></>,
 };
 
 const PokemonFullDetail = ({
-  name,
+  name, children,
 }) => {
-  const dispatch = useDispatch();
-
-  /* EVENT HANDLERS */
-  const selectPokemonHandler = useCallback(() => {
-    dispatch(ACTIONS.setPokemonForBattle(name));
-  }, [name, dispatch]);
-
   const pokemonDetail = useSelector(
     (state) => state.pokemonList.filter((pokemon) => pokemon.name === name)[0],
   );
@@ -82,7 +77,8 @@ const PokemonFullDetail = ({
               src={pokemonDetail && pokemonDetail.image}
               alt=""
             />
-            <BaseButton label="Select for battle" styleOptions={['uppercase']} onClickHandler={selectPokemonHandler} />
+            {/* Slot for pokemon selection element */}
+            {children}
           </div>
         </div>
       </>
@@ -92,5 +88,6 @@ const PokemonFullDetail = ({
 };
 
 PokemonFullDetail.propTypes = pokemonFullDetailPropTypes;
+PokemonFullDetail.defaultProps = pokemonFullDetailDefaultProps;
 
 export default PokemonFullDetail;
