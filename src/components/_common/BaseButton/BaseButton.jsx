@@ -8,7 +8,7 @@ const baseButtonPropTypes = {
   styleOptions: PropTypes.arrayOf(PropTypes.string),
 };
 
-const BaseButton = ({ label, onClickHandler, styleOptions }) => {
+const BaseButton = React.forwardRef(({ label, onClickHandler, styleOptions }, ref) => {
   const mappedStyleClasses = styleOptions.map((option) => styles[option]).join(' ');
   return (
     <>
@@ -16,12 +16,13 @@ const BaseButton = ({ label, onClickHandler, styleOptions }) => {
         type="button"
         className={mappedStyleClasses}
         onClick={onClickHandler}
+        ref={ref}
       >
         {label}
       </button>
     </>
   );
-};
+});
 
 BaseButton.defaultProps = {
   styleOptions: [''],
