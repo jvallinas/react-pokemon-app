@@ -1,5 +1,7 @@
 // Core
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState, useEffect, useLayoutEffect, useCallback, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch, useHistory } from 'react-router-dom';
@@ -103,8 +105,14 @@ const Selection = ({
   const goBackToSelection = useCallback(() => history.goBack(), [history]);
   const selectPokemonHandler = useCallback(() => {
     dispatch(ACTIONS.setPokemonForBattle(fullDetailsRoute.params.id));
-  }, [fullDetailsRoute, dispatch]);
+    goBackToSelection();
+  }, [fullDetailsRoute, dispatch, goBackToSelection]);
 
+  const selectForBattleRef = useRef();
+
+  useLayoutEffect(() => {
+    if (fullDetailsRoute) selectForBattleRef.current.focus();
+  }, [fullDetailsRoute]);
 
   return (
     <>
@@ -149,13 +157,18 @@ const Selection = ({
 
       {/* SECTION FOR FULL DETAILS IN DIALOG FRAME */}
       {fullDetailsRoute && (
-        <Modal show onModalClose={goBackToSelection}>
+        <Modal show modalCloseHandler={goBackToSelection}>
           {/* TODO replace with full details when ready */}
           <PokemonFullDetail
             key={fullDetailsRoute.params.id}
             name={fullDetailsRoute.params.id}
           >
-            <BaseButton label="Select for battle" styleOptions={['uppercase']} onClickHandler={selectPokemonHandler} />
+            <BaseButton
+              label="Select for battle"
+              styleOptions={['uppercase']}
+              onClickHandler={selectPokemonHandler}
+              ref={selectForBattleRef}
+            />
           </PokemonFullDetail>
         </Modal>
       )}
