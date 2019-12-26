@@ -20,10 +20,9 @@ const StatDisplay = ({
         {statLabel}
       </div>
       <div className={styles['stat-value']}>
-        {typeof statValue === 'object' && statValue.value
-          ? statValue.map(
-            (value) => <div key={value}>{value}</div>,
-          )
+        {typeof statValue === 'object'
+          ? statValue.map((value, index) => ({ value, id: index }))
+            .map((item) => <div key={item.id}>{item.value}</div>)
           : <div>{statValue}</div>}
       </div>
     </div>

@@ -109,8 +109,8 @@ const Selection = ({
   const paginationButtonStyles = useMemo(() => ['purple', 'transparent'], []);
 
   useLayoutEffect(() => {
-    if (fullDetailsRoute) selectForBattleRef.current.focus();
-  }, [fullDetailsRoute]);
+    if (fullDetailsRoute && selectForBattleRef.current) selectForBattleRef.current.focus();
+  }, [fullDetailsRoute, selectForBattleRef]);
 
   return (
     <>
