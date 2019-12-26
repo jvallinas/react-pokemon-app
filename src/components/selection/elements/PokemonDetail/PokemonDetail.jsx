@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
@@ -31,7 +31,8 @@ const PokemonDetail = ({
   const { response: pokemonDescription } = useHttpRequest(urlPokemonDescription);
 
   const history = useHistory();
-  const goToPokemonDetail = () => history.push(`/selection/${pokemonName}`);
+  const goToPokemonDetail = useCallback(() => history.push(`/selection/${pokemonName}`), [history, pokemonName]);
+  const selectButtonStyles = useMemo(() => ['uppercase'], []);
 
   // Adding received data from backend to Redux store
   useEffect(
@@ -65,7 +66,7 @@ const PokemonDetail = ({
         {pokemonDetail && (
           <>
             <h1 className={styles['pokemon-id']}>{pokemonDetail.id}</h1>
-            <BaseButton label="Select" onClickHandler={goToPokemonDetail} styleOptions={['uppercase']} />
+            <BaseButton label="Select" onClickHandler={goToPokemonDetail} styleOptions={selectButtonStyles} />
           </>
         )}
 

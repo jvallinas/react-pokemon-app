@@ -1,6 +1,6 @@
 // Core
 import React, {
-  useState, useEffect, useLayoutEffect, useCallback, useRef,
+  useState, useEffect, useLayoutEffect, useCallback, useRef, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -106,6 +106,7 @@ const Selection = ({
   }, [fullDetailsRoute, dispatch, goBackToSelection]);
 
   const selectForBattleRef = useRef();
+  const paginationButtonStyles = useMemo(() => ['purple', 'transparent'], []);
 
   useLayoutEffect(() => {
     if (fullDetailsRoute) selectForBattleRef.current.focus();
@@ -127,11 +128,11 @@ const Selection = ({
             selectedType={selectedType}
           />
           <div className={styles['pagination-container']}>
-            <BaseButton label="< Previous" onClickHandler={previousPageHandler} styleOptions={['purple', 'transparent']} />
+            <BaseButton label="< Previous" onClickHandler={previousPageHandler} styleOptions={paginationButtonStyles} />
             <span className={styles['page-label']}>
               {`Page ${currentPage + 1}`}
             </span>
-            <BaseButton label="Next >" onClickHandler={nextPageHandler} styleOptions={['purple', 'transparent']} />
+            <BaseButton label="Next >" onClickHandler={nextPageHandler} styleOptions={paginationButtonStyles} />
           </div>
         </>
       )}
