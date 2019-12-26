@@ -20,7 +20,6 @@ import Modal from '../_common/Modal/Modal';
 // Custom hooks
 import useHttpRequest from '../../hooks/useHttpRequest';
 import useGetAllTypesData from './hooks/useGetAllTypesData';
-import useDebounceInput from '../../hooks/useDebounceInput';
 import BattleGround from './elements/BattleGround/BattleGround';
 
 const selectionPropTypes = {
@@ -41,18 +40,17 @@ const {
 } = CONSTANTS;
 
 const Selection = ({
-  limit, offset, title, currentPage,
-  previousPageHandler, nextPageHandler,
+  limit, offset, title, currentPage, previousPageHandler, nextPageHandler,
 }) => {
+  useEffect(() => { document.title = title; }, [title]);
+
   const fullDetailsRoute = useRouteMatch('/selection/:id');
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const pokemons = useSelector((state) => state.pokemonList);
   const availableTypes = useSelector((state) => state.availableTypes);
-  const dispatch = useDispatch();
   const [selectedType, setSelectedType] = useState('');
-
-  useEffect(() => { document.title = title; }, [title]);
 
   const urlSelection = `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`;
   const {
@@ -63,8 +61,7 @@ const Selection = ({
   const { fetchedData: allTypesInfo } = useGetAllTypesData(urlTypes);
 
   const [listToDisplay, setListToDisplay] = useState([]);
-  const [currentSearch, setCurrentSearch] = useState('');
-  const debouncedCurrentSearch = useDebounceInput(currentSearch, 500);
+  const [debouncedCurrentSearch, setDebounceCurrentSearch] = useState('');
 
   // Adding received data from backend to Redux store
   useEffect(
@@ -100,7 +97,7 @@ const Selection = ({
   useEffect(() => activateRequest(), [offset, activateRequest]);
 
   /* EVENT HANDLERS */
-  const updateSearchTermHandler = useCallback((e) => setCurrentSearch(e.target.value), []);
+  const handleNewSearchInput = useCallback((newValue) => setDebounceCurrentSearch(newValue), []);
   const updateSelectedTypeHandler = useCallback((e) => setSelectedType(e.target.value), []);
   const goBackToSelection = useCallback(() => history.goBack(), [history]);
   const selectPokemonHandler = useCallback(() => {
@@ -124,8 +121,7 @@ const Selection = ({
       {response && (
         <>
           <SelectionFilter
-            currentSearch={currentSearch}
-            updateSearchTermHandler={updateSearchTermHandler}
+            onDebouncedSearchUpdate={handleNewSearchInput}
             availableTypes={availableTypes}
             updateSelectedTypeHandler={updateSelectedTypeHandler}
             selectedType={selectedType}
