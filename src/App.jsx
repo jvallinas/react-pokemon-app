@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import { Provider as ReduxProvider } from 'react-redux';
-import { Overview, Selection } from './views';
+import { Overview, Selection, Fight } from './views';
 import ROUTES from './routes';
 import CONSTANTS from './config.values';
 
@@ -43,6 +43,9 @@ const App = () => {
                 previousPageHandler={goToPreviousPage}
                 nextPageHandler={goToNextPage}
               />
+            </Route>
+            <Route path={ROUTES.APP.FIGHT}>
+              <Fight />
             </Route>
           </Switch>
         </BrowserRouter>

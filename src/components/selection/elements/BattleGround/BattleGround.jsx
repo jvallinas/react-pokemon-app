@@ -24,7 +24,7 @@ const BattleGround = () => {
   const dispatch = useDispatch();
 
   /* EVENT HANDLERS */
-  const goToFightScreen = useCallback(() => historyHandler.push('fight'), [historyHandler]);
+  const goToFightScreen = useCallback(() => historyHandler.push('/fight'), [historyHandler]);
   const removePokemon = useCallback(
     (name) => dispatch(ACTIONS.removePokemonFromBattle(name)), [dispatch],
   );
